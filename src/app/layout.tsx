@@ -1,0 +1,49 @@
+import type { Metadata } from "next";
+import { Montserrat, JetBrains_Mono } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
+import "./globals.css";
+import {
+  I18NClientProvider,
+  QueryClientWrapper,
+  ToasterProvider,
+} from "@/providers";
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin", "vietnamese"],
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin", "vietnamese"],
+});
+
+export const metadata: Metadata = {
+  title: "TST AI",
+  description: "TST AI - Chat Box",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap"
+          rel="stylesheet"
+        ></link>
+      </head>
+      <body className={`${montserrat.variable} ${jetBrainsMono.variable}`}>
+        <NextTopLoader showSpinner={false} color="#0a21c0" />
+        <QueryClientWrapper>
+          <I18NClientProvider>
+            <ToasterProvider>{children}</ToasterProvider>
+          </I18NClientProvider>
+        </QueryClientWrapper>
+      </body>
+    </html>
+  );
+}

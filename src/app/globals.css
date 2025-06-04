@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant purple (&:where(.purple, .purple *));
+
+@layer utilities {
+}
+
+:root {
+  /* **** COLORS **** */
+  --color-black: #000;
+  --color-white: #fff;
+  --color-dark-primary: #1f2b24;
+  --color-gray-charade: #2c2f3a;
+  --color-deep-cove: #050a44;
+  --color-blue-primary: #0a21c0;
+  --color-green-primary: #27ae60;
+  --color-gray-bombay: #b3b4bd;
+  --color-wild-sand: #f5f5f5;
+  --color-green-primary-800: #1a4d2e;
+  --color-green-primary-600: #4f6f52;
+  --color-green-primary-400: #e8dfca;
+  --color-green-primary-200: #f5efe6;
+  --color-gray-200: #eeeeee;
+  --color-gray-300: #dddddd;
+  --color-gray-400: #cccccc;
+  --color-gray-500: #bbbbbb;
+  --color-gray-600: #9a9a9a;
+  --color-invalid: #c01443;
+  --color-success: #34d399;
+  --color-info: #60a5fa;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-black: var(--color-black);
+  --color-white: var(--color-white);
+  --color-dark-primary: var(--color-dark-primary);
+  --color-gray-charade: var(--color-gray-charade);
+  --color-deep-cove: var(--color-deep-cove);
+  --color-blue-primary: var(--color-blue-primary);
+  --color-green-primary: var(--color-green-primary);
+  --color-gray-bombay: var(--color-gray-bombay);
+  --color-wild-sand: var(--color-wild-sand);
+  --color-green-primary-800: var(--color-green-primary-800);
+  --color-green-primary-600: var(--color-green-primary-600);
+  --color-green-primary-400: var(--color-green-primary-400);
+  --color-green-primary-200: var(--color-green-primary-200);
+  --color-invalid: var(--color-invalid);
+  --color-success: var(--color-success);
+  --color-info: var(--color-info);
+
+  --font-boldonse: "Boldonse", sans-serif;
+  --font-grotesk: "Grotesk", sans-serif;
+  --font-montserrat: var(--font-montserrat);
+}
+
+body {
+  background-color: var(--color-white);
+  color: var(--color-dark-primary);
+  font-family: var(--font-jetbrains);
+}
+
+.dark {}
+
+@layer base {
+}
