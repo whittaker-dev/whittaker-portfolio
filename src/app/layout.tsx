@@ -5,6 +5,7 @@ import "./globals.css";
 import {
   I18NClientProvider,
   QueryClientWrapper,
+  ThemeProvider,
   ToasterProvider,
 } from "@/providers";
 
@@ -36,11 +37,16 @@ export default function RootLayout({
           rel="stylesheet"
         ></link>
       </head>
-      <body className={`${montserrat.variable} ${jetBrainsMono.variable}`}>
+      <body
+        className={`${montserrat.variable} ${jetBrainsMono.variable}`}
+        suppressHydrationWarning
+      >
         <NextTopLoader showSpinner={false} color="#0a21c0" />
         <QueryClientWrapper>
           <I18NClientProvider>
-            <ToasterProvider>{children}</ToasterProvider>
+            <ToasterProvider>
+              <ThemeProvider>{children}</ThemeProvider>
+            </ToasterProvider>
           </I18NClientProvider>
         </QueryClientWrapper>
       </body>

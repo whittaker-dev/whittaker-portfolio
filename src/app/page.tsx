@@ -1,7 +1,12 @@
+"use client";
+import { Header, ToggleTheme, Background } from "@/packages/components";
+
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <h1 className="text-4xl font-bold">Certifications</h1>
+    <div className="max-w-6xl mx-auto px-2.5 md:px-6">
+      <ToggleTheme />
+      <Background />
+      <Header />
     </div>
   );
 }
