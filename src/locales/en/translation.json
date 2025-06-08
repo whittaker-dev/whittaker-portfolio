@@ -1,3 +1,11 @@
 {
-  "home": "Home"
+  "overview": "Overview",
+  "stack": "Stack",
+  "experience": "Experience",
+  "testimonials": "Testimonials",
+  "certificates": "Certificates",
+  "contact": "Contact",
+  "projects": "Projects",
+  "scroll_for_more": "Scroll for more",
+  "looking_for_your_next_dev": "Looking for your next dev?"
 }

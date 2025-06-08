@@ -1,14 +1,22 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Icon } from "@iconify/react";
 import { twMerge } from "tailwind-merge";
 import Background from "../Background";
 import { useTheme } from "@/providers/Theme";
 import Image from "next/image";
-import { menus } from "../Header";
+import { IMenu } from "../Header";
 
 const SidebarMobile = React.memo(
-  ({ isOpen, handleClose }: { isOpen: boolean; handleClose: () => void }) => {
+  ({
+    isOpen,
+    handleClose,
+    menus,
+  }: {
+    isOpen: boolean;
+    handleClose: () => void;
+    menus: IMenu[];
+  }) => {
     const { theme } = useTheme();
     return (
       <motion.div
@@ -49,7 +57,7 @@ const SidebarMobile = React.memo(
         <div className="flex items-center flex-col justify-start gap-10 mt-10 h-full font-boldonse">
           {menus.map((menu, index) => (
             <motion.a
-              key={menu.title}
+              key={index}
               href={menu.href}
               className={twMerge(
                 "text-xl font-medium text-blue-primary hover:underline dark:text-white block",
@@ -57,11 +65,14 @@ const SidebarMobile = React.memo(
               whileTap={{ scale: 0.9 }}
               initial={{ x: -200, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
-              whileHover={{ scale: 1.1 }}
               transition={{
                 duration: 0.5,
                 delay: index * 0.2,
                 ease: "easeInOut",
+              }}
+              whileHover={{
+                scale: 1.2,
+                transition: { duration: 0.1, delay: 0.2, ease: "linear" },
               }}
               onClick={handleClose}
             >

@@ -1,21 +1,10 @@
 "use client";
+import React from "react";
+import { useResponsiveDetect } from "@/packages/hooks";
+import { motion } from "motion/react";
 
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-
-export default function Background() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768 || "ontouchstart" in window);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
+const Background = () => {
+  const { isMobile } = useResponsiveDetect();
   // Reduce particle count on mobile
   const particleCount = isMobile ? 5 : 12;
 
@@ -149,4 +138,6 @@ export default function Background() {
       )}
     </div>
   );
-}
+};
+
+export default Background;

@@ -1,64 +1,65 @@
 "use client";
 import { useTheme } from "@/providers/Theme";
 import { Icon } from "@iconify/react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import SidebarMobile from "../SidebarMobile";
 import { useResponsiveDetect } from "@/packages/hooks";
+import { t } from "i18next";
 
 export interface IMenu {
   title: string;
   href: string;
 }
-export const menus: IMenu[] = [
-  {
-    title: "Overview",
-    href: "#overview",
-  },
-  {
-    title: "Stack",
-    href: "#stack",
-  },
-  {
-    title: "Experience",
-    href: "#experience",
-  },
-  {
-    title: "Projects",
-    href: "#projects",
-  },
-  {
-    title: "Testimonials",
-    href: "#testimonials",
-  },
-  {
-    title: "Certificates",
-    href: "#certificates",
-  },
-  {
-    title: "Contact",
-    href: "#contact",
-  },
-];
+
 const Header = () => {
   const { theme } = useTheme();
   const { isMobile } = useResponsiveDetect();
   const [isShowSidebar, setIsShowSidebar] = useState(false);
+  const menus: IMenu[] = [
+    {
+      title: t("overview"),
+      href: "#overview",
+    },
+    {
+      title: t("stack"),
+      href: "#stack",
+    },
+    {
+      title: t("experience"),
+      href: "#experience",
+    },
+    {
+      title: t("projects"),
+      href: "#projects",
+    },
+    {
+      title: t("testimonials"),
+      href: "#testimonials",
+    },
+    {
+      title: t("certificates"),
+      href: "#certificates",
+    },
+    {
+      title: t("contact"),
+      href: "#contact",
+    },
+  ];
   const toggleShowSidebar = () => {
     setIsShowSidebar(!isShowSidebar);
   };
 
   useEffect(() => {
-    console.log("isMobile", isMobile);
     if (!isMobile) {
       setIsShowSidebar(false);
     }
   }, [isMobile]);
 
   return (
-    <div className="w-full flex items-center justify-between md:justify-center5 md:py-5 gap-10">
+    <div className="w-full flex items-center justify-between md:justify-center5 md:py-2 gap-10">
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
@@ -75,7 +76,7 @@ const Header = () => {
       <div className="items-center justify-end gap-6 hidden md:flex">
         {menus.map((menu, index) => (
           <motion.a
-            key={menu.title}
+            key={index}
             href={menu.href}
             className={twMerge(
               "text-sm font-medium text-blue-primary hover:underline dark:text-white",
@@ -96,7 +97,11 @@ const Header = () => {
         onClick={toggleShowSidebar}
       />
 
-      <SidebarMobile isOpen={isShowSidebar} handleClose={toggleShowSidebar} />
+      <SidebarMobile
+        isOpen={isShowSidebar}
+        handleClose={toggleShowSidebar}
+        menus={menus}
+      />
     </div>
   );
 };
