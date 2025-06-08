@@ -35,9 +35,9 @@ const SidebarMobile = React.memo(
             className="w-16 md:w-14 h-16 md:h-14 relative rounded-full overflow-hidden cursor-pointer"
           >
             {theme === "dark" ? (
-              <Image src={"/images/logo_white.png"} fill alt={"logo"} />
+              <Image src={"/assets/images/logo_white.png"} fill alt={"logo"} />
             ) : (
-              <Image src={"/images/logo.png"} fill alt={"logo"} />
+              <Image src={"/assets/images/logo.png"} fill alt={"logo"} />
             )}
           </motion.div>
           <motion.div

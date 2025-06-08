@@ -68,12 +68,12 @@ const Header = () => {
         className="w-16 md:w-14 h-16 md:h-14 relative rounded-full overflow-hidden cursor-pointer"
       >
         {theme === "dark" ? (
-          <Image src={"/images/logo_white.png"} fill alt={"logo"} />
+          <Image src={"/assets/images/logo_white.png"} fill alt={"logo"} />
         ) : (
-          <Image src={"/images/logo.png"} fill alt={"logo"} />
+          <Image src={"/assets/images/logo.png"} fill alt={"logo"} />
         )}
       </motion.div>
-      <div className="items-center justify-end gap-6 hidden md:flex">
+      <div className="items-center justify-end gap-6 hidden md:flex flex-1">
         {menus.map((menu, index) => (
           <motion.a
             key={index}

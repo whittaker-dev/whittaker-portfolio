@@ -20,7 +20,7 @@ export function middleware(req: NextRequest) {
   if (pathnameHasLocale) return;
 
   const locale = defaultLocale;
-  req.nextUrl.pathname = `/${locale}${pathname}`;
+  req.nextUrl.pathname = `/${locale}${pathname}/`;
 
   return NextResponse.redirect(req.nextUrl);
 }
