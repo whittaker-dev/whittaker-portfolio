@@ -1,8 +1,7 @@
 import { TypeWriter } from "@/packages/components";
-import React from "react";
 import { Icon } from "@iconify/react";
-import { motion } from "motion/react";
 import { t } from "i18next";
+import { motion } from "motion/react";
 
 interface ISocialLink {
   name: string;
@@ -33,6 +32,13 @@ const HeroSection = () => {
       icon: "skill-icons:gmail-light",
     },
   ];
+
+  const handleScrollForMore = () => {
+    const element = document.getElementById("about");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
   return (
     <div className="flex items-center justify-center flex-col mt-20 md:mt-40">
       {/* ==== NAME ==== */}
@@ -52,7 +58,7 @@ const HeroSection = () => {
         initial={{ scale: 0, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.5 }}
-        className="w-full md:max-w-1/2 text-center text-sm md:text-base font-normal text-dark-primary mt-3 md:mt-6"
+        className="w-full md:max-w-1/2 text-center text-sm md:text-base font-normal text-dark-primary mt-3 md:mt-6 dark:text-white"
       >
         Engineering full-stack solutions that blend performance, clean code,
         scalability, and beautiful design.
@@ -73,7 +79,7 @@ const HeroSection = () => {
             className="flex items-center justify-center gap-2 border border-gray-300 px-2 md:px-3 py-1 md:py-2 rounded-xl hover:bg-blue-primary/10 shadow-xl"
           >
             <Icon icon={link.icon} className="size-4 md:size-5" />
-            <motion.span className="text-sm font-normal text-dark-primary">
+            <motion.span className="text-sm font-normal text-dark-primary dark:text-white">
               {link.name}
             </motion.span>
           </motion.a>
@@ -102,6 +108,27 @@ const HeroSection = () => {
           {t("looking_for_your_next_dev")}
         </motion.span>
       </motion.a>
+
+      {/* ==== SCROLL DOWN INDICATOR ==== */}
+      <motion.div
+        animate={{ y: [0, 20, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="flex items-center justify-center flex-col mt-10 cursor-pointer"
+        onClick={handleScrollForMore}
+      >
+        <motion.span className="text-[10px] md:text-xs font-normal text-green-primary font-boldonse">
+          {t("scroll_for_more")}
+        </motion.span>
+        <motion.div
+          animate={{ y: [0, 20, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <Icon
+            icon="uil:angle-double-down"
+            className="size-5 md:size-6 text-green-primary"
+          />
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

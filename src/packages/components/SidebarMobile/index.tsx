@@ -1,11 +1,11 @@
-import React from "react";
-import { motion } from "motion/react";
-import { Icon } from "@iconify/react";
-import { twMerge } from "tailwind-merge";
-import Background from "../Background";
 import { useTheme } from "@/providers/Theme";
+import { Icon } from "@iconify/react";
+import { motion } from "motion/react";
 import Image from "next/image";
+import React from "react";
+import { twMerge } from "tailwind-merge";
 import { IMenu } from "../Header";
+import BackgroundWithoutPoints from "../BackgroundWithoutPoints";
 
 const SidebarMobile = React.memo(
   ({
@@ -18,6 +18,7 @@ const SidebarMobile = React.memo(
     menus: IMenu[];
   }) => {
     const { theme } = useTheme();
+
     return (
       <motion.div
         className={twMerge(
@@ -25,7 +26,8 @@ const SidebarMobile = React.memo(
           isOpen ? "translate-x-0" : "translate-x-[1000px]",
         )}
       >
-        <Background />
+        <BackgroundWithoutPoints />
+
         <div className="flex items-center justify-between">
           <motion.div
             initial={{ scale: 0, opacity: 0 }}

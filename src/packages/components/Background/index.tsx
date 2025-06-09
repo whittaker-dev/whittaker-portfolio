@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 const Background = () => {
   const { isMobile } = useResponsiveDetect();
   // Reduce particle count on mobile
-  const particleCount = isMobile ? 5 : 12;
+  const particleCount = isMobile ? 5 : 8;
 
   // Reduce animation complexity on mobile
   const animationConfig = isMobile
