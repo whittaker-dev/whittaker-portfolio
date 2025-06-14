@@ -16,6 +16,27 @@ const AboutMe = () => {
     "Git",
     "TailwindCSS",
   ];
+
+  const connectInfo = [
+    {
+      name: "email",
+      icon: "solar:mailbox-bold",
+      link: "mailto:minhtai250501@gmail.com",
+      value: "minhtai250501@gmail.com",
+    },
+    {
+      name: "portfolio",
+      icon: "solar:user-id-bold",
+      link: "whittaker-portfolio.vercel.app",
+      value: "whittaker-portfolio.vercel.app",
+    },
+    {
+      name: "address",
+      icon: "solar:map-point-wave-bold",
+      link: null,
+      value: "Ho Chi Minh City, Vietnam",
+    },
+  ];
   return (
     <motion.section
       id="about"
@@ -31,7 +52,7 @@ const AboutMe = () => {
         showUnderline
       />
 
-      {/* ABOUT ME CONTENT */}
+      {/* ==== ABOUT ME CONTENT ==== */}
       <motion.div className="mt-10 bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-xl shadow-xl p-6 backdrop-blur-xl dark:border-white/10 border border-dark-primary/10 dark:from-gray-900 dark:via-white/10 dark:to-black">
         <motion.h1 className="text-xl md:text-2xl font-black text-dark-primary dark:text-white">
           {t("about_me_title")}
@@ -82,6 +103,46 @@ const AboutMe = () => {
               </motion.span>
             ))}
           </div>
+        </div>
+      </motion.div>
+
+      {/* ==== LET"S CONNECT ==== */}
+      <motion.div className="mt-10 bg-gradient-to-br bg-green-600 rounded-xl shadow-xl p-4 backdrop-blur-xl dark:border-white/10 border border-dark-primary/10 dark:bg-green-primary">
+        <div className="flex items-center justify-start gap-2">
+          <Icon
+            icon="solar:chat-round-dots-bold"
+            className="size-4 md:size-6 text-white dark:text-white"
+          />
+          <motion.h1 className="text-sm md:text-base font-black text-white">
+            {t("lets_connect")}
+          </motion.h1>
+        </div>
+        <div className="mt-4">
+          {connectInfo.map((info, index) => (
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ x: 20, transition: { duration: 0.2 } }}
+              key={index}
+              className="flex items-center justify-start gap-2 mt-3 py-2 px-2 rounded-lg bg-white cursor-pointer"
+            >
+              <div className="size-7 rounded-full bg-blue-primary flex items-center justify-center">
+                <Icon
+                  icon={info.icon}
+                  className="size-3 md:size-4 text-white dark:text-white"
+                />
+              </div>
+              <a
+                href={info.link ? info.link : "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs md:text-sm font-medium text-dark-primary dark:text-dark-primary"
+              >
+                {info.value}
+              </a>
+            </motion.div>
+          ))}
         </div>
       </motion.div>
     </motion.section>
