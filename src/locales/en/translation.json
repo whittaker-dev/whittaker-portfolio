@@ -15,5 +15,12 @@
   "about_me_skills": "I specialize in building scalable web and mobile applications using Node.js, React, TypeScript, NextJS and and modern development technologies",
   "about_me_more_introduction": "I excel at building efficient, scalable web applications, with a strong focus on clean code and modern development practices. I am committed to delivering high-quality solutions and continuously enhancing my skills in a dynamic, collaborative environment.",
   "core_technologies": "Core Technologies",
-  "lets_connect": "Let's Connect"
+  "lets_connect": "Let's Connect",
+  "technology_stack": "Technology Stack",
+  "technology_stack_desc": "The tools and frameworks that bring my ideas to life — fast, reliable, and adaptable.",
+  "basic": "Basic",
+  "intermediate": "Intermediate",
+  "advanced": "Advanced",
+  "expert": "Expert",
+  "all": "All"
 }

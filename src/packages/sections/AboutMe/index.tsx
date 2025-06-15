@@ -27,7 +27,7 @@ const AboutMe = () => {
     {
       name: "portfolio",
       icon: "solar:user-id-bold",
-      link: "whittaker-portfolio.vercel.app",
+      link: "https://whittaker-portfolio.vercel.app",
       value: "whittaker-portfolio.vercel.app",
     },
     {
@@ -133,14 +133,19 @@ const AboutMe = () => {
                   className="size-3 md:size-4 text-white dark:text-white"
                 />
               </div>
-              <a
-                href={info.link ? info.link : "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs md:text-sm font-medium text-dark-primary dark:text-dark-primary"
-              >
-                {info.value}
-              </a>
+              {info.link ? (
+                <a
+                  href={info.link}
+                  rel="noopener noreferrer"
+                  className="text-xs md:text-sm font-medium text-dark-primary dark:text-dark-primary"
+                >
+                  {info.value}
+                </a>
+              ) : (
+                <p className="text-xs md:text-sm font-medium text-dark-primary dark:text-dark-primary">
+                  {info.value}
+                </p>
+              )}
             </motion.div>
           ))}
         </div>

@@ -24,6 +24,7 @@
     "axios": "^1.8.4",
     "i18next": "^25.2.1",
     "lint-staged": "^15.5.0",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.513.0",
     "motion": "^12.16.0",
     "next": "15.3.3",
@@ -41,6 +42,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/lodash": "^4.17.17",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

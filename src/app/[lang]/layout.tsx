@@ -20,8 +20,8 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TST AI",
-  description: "TST AI - Chat Box",
+  title: "James Whittaker",
+  description: "James Whittaker - Full Stack Developer",
 };
 
 export default function RootLayout({

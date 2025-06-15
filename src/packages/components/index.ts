@@ -3,5 +3,17 @@ import Header from "./Header";
 import ToggleTheme from "./ToggleTheme";
 import TypeWriter from "./TypeWriter";
 import BackgroundWithoutPoints from "./BackgroundWithoutPoints";
+import SectionHeader from "./SectionHeader";
+import TechStackList from "./TechStackList";
+import TechStackItem from "./TechStackItem";
 
-export { Background, Header, ToggleTheme, TypeWriter, BackgroundWithoutPoints };
+export {
+  Background,
+  Header,
+  ToggleTheme,
+  TypeWriter,
+  BackgroundWithoutPoints,
+  SectionHeader,
+  TechStackList,
+  TechStackItem,
+};

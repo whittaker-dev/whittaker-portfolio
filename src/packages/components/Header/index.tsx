@@ -21,11 +21,11 @@ const Header = () => {
   const menus: IMenu[] = [
     {
       title: t("overview"),
-      href: "#overview",
+      href: "#about",
     },
     {
       title: t("stack"),
-      href: "#stack",
+      href: "#technology-stack",
     },
     {
       title: t("experience"),

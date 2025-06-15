@@ -1,6 +1,6 @@
 "use client";
 import { Header, ToggleTheme, Background } from "@/packages/components";
-import { AboutMe, HeroSection } from "@/packages/sections";
+import { AboutMe, HeroSection, TechnologyStack } from "@/packages/sections";
 import { ClientOnly } from "@/providers";
 
 export default function Home() {
@@ -15,6 +15,8 @@ export default function Home() {
           <HeroSection />
 
           <AboutMe />
+
+          <TechnologyStack />
         </div>
       </div>
     </ClientOnly>

@@ -5,6 +5,11 @@
 
 @layer utilities {
 }
+@layer components {
+  .card {
+    @apply bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-xl shadow-xl p-6 backdrop-blur-xl dark:border-white/10 dark:border dark:from-gray-800 dark:via-white/5 dark:to-gray-900;
+  }
+}
 
 :root {
   /* **** COLORS **** */
@@ -57,7 +62,9 @@
   --font-grotesk: "Grotesk", sans-serif;
   --font-montserrat: var(--font-montserrat);
 }
-
+* {
+  scroll-behavior: smooth;
+}
 body {
   background-color: var(--color-white);
   color: var(--color-dark-primary);
