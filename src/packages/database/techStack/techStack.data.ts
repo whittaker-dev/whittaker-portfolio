@@ -24,7 +24,7 @@ export const backendStack: ITechStack[] = [
     id: uniqueId(),
     name: "Socket.io",
     icon: "devicon:socketio",
-    experience: 2,
+    experience: 2.5,
   },
 ];
 
