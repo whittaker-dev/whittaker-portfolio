@@ -1,13 +1,20 @@
 "use client";
+import {
+  Accordion,
+  AccordionButton,
+  AccordionItem,
+  AccordionPanel,
+} from "@/components/animate-ui/headless/accordion";
+import { useResponsiveDetect } from "@/packages/hooks";
 import { useTheme } from "@/providers/Theme";
 import { Icon } from "@iconify/react";
+import { t } from "i18next";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import SidebarMobile from "../SidebarMobile";
-import { useResponsiveDetect } from "@/packages/hooks";
-import { t } from "i18next";
+import UserPopover from "../UserPopover";
 
 export interface IMenu {
   title: string;
@@ -90,6 +97,73 @@ const Header = () => {
           </motion.a>
         ))}
       </div>
+
+      <UserPopover
+        align={isMobile ? "center" : "end"}
+        trigger={
+          <motion.div className="relative size-10 rounded-full overflow-hidden cursor-pointer">
+            <Image
+              src={"/assets/images/avatar.jpeg"}
+              alt=""
+              fill
+              className="object-cover"
+            />
+          </motion.div>
+        }
+        content={
+          <div className="">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between gap-2">
+                <h1 className="text-sm md:text-base font-black text-dark-primary">
+                  Minh Tai
+                </h1>
+                <Icon
+                  icon="iconamoon:settings-fill"
+                  className="size-6 animate-spin text-green-primary"
+                />
+              </div>
+              <p className="text-xs md:text-sm font-medium text-gray-500">
+                minhtai250501@gmail.com
+              </p>
+            </div>
+            <div className="w-full h-[1px] bg-gray-300 mt-2.5 md:mt-4"></div>
+            <Accordion className="w-full">
+              <AccordionItem className="border-0">
+                <AccordionButton
+                  className="cursor-pointer hover:no-underline border-0 pb-0 flex items-center justify-between"
+                  chevronClassName="text-green-primary"
+                >
+                  <h1 className="text-sm md:text-sm font-black text-green-primary">
+                    {t("explore_more")}
+                  </h1>
+                </AccordionButton>
+                <AccordionPanel className="space-y-4 mt-4 pb-0">
+                  <a
+                    href="#"
+                    className="text-xs md:text-sm font-semibold text-dark-primary hover:underline flex items-center justify-start gap-2 hover:text-green-primary"
+                  >
+                    <Icon
+                      icon="majesticons:article"
+                      className="size-4 md:size-6 text-green-primary"
+                    />
+                    {t("my_blog")}
+                  </a>
+                  <a
+                    href="#"
+                    className="text- md:text-sm font-semibold text-dark-primary hover:underline flex items-center justify-start gap-2 hover:text-green-primary"
+                  >
+                    <Icon
+                      icon="tabler:file-cv-filled"
+                      className="size-4 md:size-6 text-green-primary"
+                    />
+                    {t("my_resume")}
+                  </a>
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+          </div>
+        }
+      />
 
       <Icon
         icon="solar:hamburger-menu-broken"

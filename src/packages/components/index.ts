@@ -8,6 +8,7 @@ import TechStackList from "./TechStackList";
 import TechStackItem from "./TechStackItem";
 import ExperienceItem from "./ExperienceItem";
 import AnimatedLinePath from "./AnimatedLinePath";
+import UserPopover from "./UserPopover";
 
 export {
   Background,
@@ -20,4 +21,5 @@ export {
   TechStackItem,
   ExperienceItem,
   AnimatedLinePath,
+  UserPopover,
 };
