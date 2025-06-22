@@ -162,7 +162,7 @@ const aiIntegrationStack: ITechStack[] = [
     id: uniqueId(),
     name: "Supabase",
     icon: "logos:supabase-icon",
-    experience: 1.5,
+    experience: 0.5,
   },
   {
     id: uniqueId(),

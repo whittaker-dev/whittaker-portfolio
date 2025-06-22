@@ -19,6 +19,7 @@
   --color-gray-charade: #2c2f3a;
   --color-deep-cove: #050a44;
   --color-blue-primary: #0a21c0;
+  --color-blue-secondary: #a98bfa;
   --color-green-primary: #27ae60;
   --color-gray-bombay: #b3b4bd;
   --color-wild-sand: #f5f5f5;
@@ -30,6 +31,7 @@
   --color-success: #34d399;
   --color-info: #60a5fa;
   --color-green-300: #f1fbf7;
+  --color-yellow-cup: #fdde14;
 }
 
 .dark {
@@ -57,6 +59,8 @@
   --color-success: var(--color-success);
   --color-info: var(--color-info);
   --color-green-300: var(--color-green-300);
+  --color-yellow-cup: var(--color-yellow-cup);
+  --color-blue-secondary: var(--color-blue-secondary);
 
   --font-boldonse: "Boldonse", sans-serif;
   --font-grotesk: "Grotesk", sans-serif;

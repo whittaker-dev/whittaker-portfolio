@@ -1,4 +1,4 @@
-import { TypeWriter } from "@/packages/components";
+import { AnimatedLinePath, TypeWriter } from "@/packages/components";
 import { Icon } from "@iconify/react";
 import { t } from "i18next";
 import { motion } from "motion/react";
@@ -42,14 +42,17 @@ const HeroSection = () => {
   return (
     <div className="flex items-center justify-center flex-col mt-20 md:mt-40">
       {/* ==== NAME ==== */}
-      <motion.h1
-        initial={{ scale: 0, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
-        className="text-center mb-3 md:mb-6 text-3xl md:text-5xl font-bold text-green-primary font-boldonse"
-      >
-        {fullName}
-      </motion.h1>
+      <div className="relative mb-4">
+        <motion.h1
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="text-center mb-3 md:mb-6 text-3xl md:text-5xl font-bold text-green-primary font-boldonse"
+        >
+          {fullName}
+        </motion.h1>
+        <AnimatedLinePath />
+      </div>
 
       {/* ==== TYPE WRITER ==== */}
       <TypeWriter titles={headlines} />

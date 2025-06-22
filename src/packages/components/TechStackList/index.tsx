@@ -60,7 +60,7 @@ const TechStackList = () => {
                 <h2 className="text-lg md:text-xl font-bold text-dark-primary dark:text-white">
                   {category.name}
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2.5">
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-2.5">
                   {category.techStacks.map((item, index) => (
                     <TechStackItem stack={item} key={item.id} index={index} />
                   ))}
@@ -70,7 +70,7 @@ const TechStackList = () => {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
           {techStackItems.map((item, index) => (
             <TechStackItem stack={item} key={item.id} index={index} />
           ))}

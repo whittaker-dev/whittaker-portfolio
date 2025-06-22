@@ -119,7 +119,7 @@ const TechStackItem = ({
         isExpert && "hover:shadow-blue-primary/25",
       )}
     >
-      <div className="size-12 md:size-16 flex items-center justify-center rounded-lg bg-gray-200 group-hover:scale-105 group-hover:-rotate-12 delay-150 ease-in-out transition-all group-hover:bg-green-400">
+      <div className="size-12 md:size-16 flex items-center justify-center rounded-lg bg-gray-200 group-hover:scale-105 group-hover:-rotate-12 delay-150 ease-in-out transition-all">
         <motion.div
           whileHover={{
             scale: 1.2,

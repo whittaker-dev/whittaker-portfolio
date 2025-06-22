@@ -23,5 +23,10 @@
   "advanced": "Advanced",
   "expert": "Expert",
   "all": "All",
-  "years_exp": "years exp"
+  "years_exp": "years exp",
+  "experience_desc": "A look into my professional evolution and the contributions I've made over the years.",
+  "software_engineer": "Software Engineer",
+  "present": "Present",
+  "key_achievements": "Key Achievements",
+  "technologies_skills": "Technologies & Skills"
 }

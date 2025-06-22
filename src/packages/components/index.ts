@@ -6,6 +6,8 @@ import BackgroundWithoutPoints from "./BackgroundWithoutPoints";
 import SectionHeader from "./SectionHeader";
 import TechStackList from "./TechStackList";
 import TechStackItem from "./TechStackItem";
+import ExperienceItem from "./ExperienceItem";
+import AnimatedLinePath from "./AnimatedLinePath";
 
 export {
   Background,
@@ -16,4 +18,6 @@ export {
   SectionHeader,
   TechStackList,
   TechStackItem,
+  ExperienceItem,
+  AnimatedLinePath,
 };

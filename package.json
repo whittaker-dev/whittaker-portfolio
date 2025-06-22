@@ -22,6 +22,7 @@
     "@iconify/react": "^6.0.0",
     "@tanstack/react-query": "^5.80.3",
     "axios": "^1.8.4",
+    "dayjs": "^1.11.13",
     "i18next": "^25.2.1",
     "lint-staged": "^15.5.0",
     "lodash": "^4.17.21",

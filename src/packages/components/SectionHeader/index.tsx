@@ -11,8 +11,11 @@ type Props = {
 const SectionHeader = React.memo(
   ({ title, description, showUnderline }: Props) => {
     return (
-      <div className="flex items-center justify-center flex-col">
-        <motion.h1 className="text-xl md:text-4xl font-black text-green-primary py-2 px-4 border border-green-primary rounded-xl bg-white dark:border-green-primary">
+      <motion.div className="flex items-center justify-center flex-col cursor-pointer">
+        <motion.h1
+          whileHover={{ scale: 1.1 }}
+          className="text-xl md:text-4xl font-black text-green-primary py-2 px-4 border border-green-primary rounded-xl bg-white dark:border-green-primary"
+        >
           * {title} *
         </motion.h1>
         {showUnderline && (
@@ -26,7 +29,7 @@ const SectionHeader = React.memo(
         <motion.p className="text-sm md:text-base font-normal text-dark-primary text-center dark:text-white">
           {description}
         </motion.p>
-      </div>
+      </motion.div>
     );
   },
 );
