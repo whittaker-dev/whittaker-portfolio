@@ -1,4 +1,4 @@
-import { AnimatedLinePath, TypeWriter } from "@/packages/components";
+import { TypeWriter } from "@/packages/components";
 import { Icon } from "@iconify/react";
 import { t } from "i18next";
 import { motion } from "motion/react";
@@ -51,7 +51,6 @@ const HeroSection = () => {
         >
           {fullName}
         </motion.h1>
-        <AnimatedLinePath />
       </div>
 
       {/* ==== TYPE WRITER ==== */}

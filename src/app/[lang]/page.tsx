@@ -1,5 +1,6 @@
 "use client";
-import { Header, ToggleTheme, Background } from "@/packages/components";
+import { Background, Header, ToggleTheme } from "@/packages/components";
+import Toolbar from "@/packages/components/Toolbar";
 import {
   AboutMe,
   ExperienceSection,
@@ -28,6 +29,7 @@ export default function Home() {
             <ExperienceSection />
           </div>
         </div>
+        <Toolbar />
       </ClientOnly>
     </Suspense>
   );

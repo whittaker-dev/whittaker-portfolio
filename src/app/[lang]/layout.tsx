@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import { Montserrat, JetBrains_Mono } from "next/font/google";
-import NextTopLoader from "nextjs-toploader";
-import "./globals.css";
 import {
   I18NClientProvider,
   QueryClientWrapper,
   ThemeProvider,
   ToasterProvider,
 } from "@/providers";
+import type { Metadata } from "next";
+import { JetBrains_Mono, Montserrat } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
+import "./globals.css";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
