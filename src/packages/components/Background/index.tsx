@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useResponsiveDetect } from "@/packages/hooks";
-import { motion } from "motion/react";
+import { Easing, motion } from "motion/react";
 
 const Background = () => {
   const { isMobile } = useResponsiveDetect();
@@ -10,8 +10,8 @@ const Background = () => {
 
   // Reduce animation complexity on mobile
   const animationConfig = isMobile
-    ? { duration: 12, ease: "linear" }
-    : { duration: 8, ease: "easeInOut" };
+    ? { duration: 12, ease: "linear" as Easing }
+    : { duration: 8, ease: "easeInOut" as Easing };
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">

@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import SidebarMobile from "../SidebarMobile";
 import UserPopover from "../UserPopover";
+import { userSettings } from "@/packages/database";
 
 export interface IMenu {
   title: string;
@@ -128,7 +129,7 @@ const Header = () => {
             </div>
             <div className="w-full h-[1px] bg-gray-300 mt-2.5 md:mt-4"></div>
             <Accordion className="w-full">
-              <AccordionItem className="border-0">
+              <AccordionItem className="border-0" defaultOpen>
                 <AccordionButton
                   className="cursor-pointer hover:no-underline border-0 pb-0 flex items-center justify-between"
                   chevronClassName="text-green-primary"
@@ -138,26 +139,19 @@ const Header = () => {
                   </h1>
                 </AccordionButton>
                 <AccordionPanel className="space-y-4 mt-4 pb-0">
-                  <a
-                    href="#"
-                    className="text-xs md:text-sm font-semibold text-dark-primary hover:underline flex items-center justify-start gap-2 hover:text-green-primary"
-                  >
-                    <Icon
-                      icon="majesticons:article"
-                      className="size-4 md:size-6 text-green-primary"
-                    />
-                    {t("my_blog")}
-                  </a>
-                  <a
-                    href="#"
-                    className="text- md:text-sm font-semibold text-dark-primary hover:underline flex items-center justify-start gap-2 hover:text-green-primary"
-                  >
-                    <Icon
-                      icon="tabler:file-cv-filled"
-                      className="size-4 md:size-6 text-green-primary"
-                    />
-                    {t("my_resume")}
-                  </a>
+                  {userSettings.map((setting) => (
+                    <a
+                      key={setting.id}
+                      href="#"
+                      className="text-xs md:text-sm font-semibold text-dark-primary hover:underline flex items-center justify-start gap-2 hover:text-green-primary"
+                    >
+                      <Icon
+                        icon={setting.icon}
+                        className="size-4 md:size-6 text-green-primary"
+                      />
+                      {t(setting.title)}
+                    </a>
+                  ))}
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>

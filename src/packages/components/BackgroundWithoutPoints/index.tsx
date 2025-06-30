@@ -1,13 +1,13 @@
 import { useResponsiveDetect } from "@/packages/hooks";
 import React from "react";
-import { motion } from "motion/react";
+import { Easing, motion } from "motion/react";
 
 const BackgroundWithoutPoints = () => {
   const { isMobile } = useResponsiveDetect();
 
   const animationConfig = isMobile
-    ? { duration: 12, ease: "linear" }
-    : { duration: 8, ease: "easeInOut" };
+    ? { duration: 12, ease: "linear" as Easing }
+    : { duration: 8, ease: "easeInOut" as Easing };
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-black" />

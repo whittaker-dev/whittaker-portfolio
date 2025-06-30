@@ -39,6 +39,8 @@ const UserPopover = ({
         sideOffset={sideOffset}
         align={align}
         alignOffset={alignOffset}
+        trackAnchor
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
       >
         {content}
       </PopoverContent>
