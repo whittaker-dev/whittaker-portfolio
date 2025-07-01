@@ -36,6 +36,12 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap"
           rel="stylesheet"
         ></link>
+        <link
+          rel="icon"
+          href="/assets/images/logo-ico.jpeg"
+          type="image/png"
+          sizes="32x32"
+        />
       </head>
       <body
         className={`${montserrat.variable} ${jetBrainsMono.variable}`}

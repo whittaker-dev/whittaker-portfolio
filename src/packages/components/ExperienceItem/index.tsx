@@ -6,7 +6,9 @@ import { motion } from "motion/react";
 import { Icon } from "@iconify/react";
 import dayjs from "dayjs";
 import { t } from "i18next";
+import { useResponsiveDetect } from "@/packages/hooks";
 const ExperienceItem = ({ experience }: { experience: IExperience }) => {
+  const { isMobile } = useResponsiveDetect();
   return (
     <div className="flex items-start justify-center md:justify-start gap-6 flex-col md:flex-row">
       <div className="flex items-center justify-center md:justify-start gap-6 flex-col md:flex-row w-full md:w-fit">
@@ -81,7 +83,7 @@ const ExperienceItem = ({ experience }: { experience: IExperience }) => {
           </motion.p>
 
           <motion.p
-            initial={{ x: 50, opacity: 0 }}
+            initial={{ x: isMobile ? 0 : 50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, ease: "easeInOut", delay: 0.4 }}
             className="mt-4 text-sm md:text-base font-medium text-gray-700 leading-[25px] dark:text-white"

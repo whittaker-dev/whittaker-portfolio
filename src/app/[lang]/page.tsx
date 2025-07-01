@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <Suspense fallback={"loading..."}>
       <ClientOnly>
-        <div className="max-w-5xl mx-auto px-2.5 md:px-6">
+        <div className="max-w-full md:max-w-5xl mx-auto px-2.5 md:px-6">
           <ToggleTheme />
           <Background />
           <Header />
