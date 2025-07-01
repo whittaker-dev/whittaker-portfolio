@@ -19,7 +19,7 @@ export default function Home() {
           <Background />
           <Header />
 
-          <div className="w-full">
+          <div className="w-full mt-32 md:mt-4">
             <HeroSection />
 
             <AboutMe />

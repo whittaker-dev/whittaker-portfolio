@@ -26,6 +26,8 @@ const Header = () => {
   const { theme } = useTheme();
   const { isMobile } = useResponsiveDetect();
   const [isShowSidebar, setIsShowSidebar] = useState(false);
+  const [isShowShadow, setIsShowShadow] = useState(false);
+
   const menus: IMenu[] = [
     {
       title: t("overview"),
@@ -66,8 +68,23 @@ const Header = () => {
     }
   }, [isMobile]);
 
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        setIsShowShadow(true);
+      } else {
+        setIsShowShadow(false);
+      }
+    });
+  }, [isShowShadow]);
+
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 shadow-md">
+    <div
+      className={twMerge(
+        "fixed top-0 left-0 right-0 z-50 w-full bg-gradient-to-br transition-all duration-200 from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700",
+        isShowShadow && "shadow-md",
+      )}
+    >
       <div className="my-0 mx-auto flex items-center justify-between lg:justify-center md:py-2 pr-2.5 md:pr-0 gap-10 max-w-[100%] md:max-w-[80%] xl:max-w-[65%]">
         <motion.div
           initial={{ scale: 0, opacity: 0 }}

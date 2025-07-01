@@ -3,10 +3,10 @@ import { IUserSettings, userSettings } from "@/packages/database";
 import { Icon } from "@iconify/react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import Image from "next/image";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 const Toolbar = () => {
-  const [isShow, setIsShow] = React.useState(false);
+  const [isShow, setIsShow] = useState(false);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
