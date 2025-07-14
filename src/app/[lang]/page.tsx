@@ -5,6 +5,7 @@ import {
   AboutMe,
   ExperienceSection,
   HeroSection,
+  Projects,
   TechnologyStack,
 } from "@/packages/sections";
 import { ClientOnly } from "@/providers";
@@ -27,6 +28,8 @@ export default function Home() {
             <TechnologyStack />
 
             <ExperienceSection />
+
+            <Projects />
           </div>
         </div>
         <Toolbar />

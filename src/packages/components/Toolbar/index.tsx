@@ -39,25 +39,17 @@ const Toolbar = () => {
       <motion.div
         ref={ref}
         style={{ width }}
-        className="aspect-square rounded-lg flex items-center justify-center cursor-pointer relative group"
+        className="aspect-square rounded-lg flex items-center justify-center cursor-pointer relative group relative"
         whileHover={{ y: -10 }}
         whileTap={{ scale: 0.95 }}
       >
-        <div
+        <a
+          href={menu.link}
           className={`w-full h-full rounded-lg flex items-center justify-center text-white relative overflow-hidden`}
         >
           <Icon icon={menu.icon} className="size-4 md:size-6 text-white z-10" />
           <div className="absolute bg-green-primary w-full h-full rounded-lg" />
-        </div>
-
-        {/* Tooltip */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileHover={{ opacity: 1, y: -5 }}
-          className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap pointer-events-none"
-        >
-          {menu.title}
-        </motion.div>
+        </a>
       </motion.div>
     );
   }
