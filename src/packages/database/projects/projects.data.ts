@@ -1,7 +1,9 @@
+import { uniqueId } from "lodash";
 import { IProject } from "./project.interface";
 
 export const projects: IProject[] = [
   {
+    id: uniqueId(),
     title: "Tyler Tran Portfolio",
     description:
       "A modern, responsive portfolio website showcasing full-stack development skills with interactive animations and smooth user experience. Built with cutting-edge technologies and optimized for performance.",
@@ -28,16 +30,16 @@ export const projects: IProject[] = [
       "🔍 SEO optimized",
       "⚡ Performance optimized with lazy loading",
     ],
-    // TODO: Need update real images
     screenshots: [
-      "/images/tyler-portfolio-home.png",
-      "/images/tyler-portfolio-projects.png",
-      "/images/tyler-portfolio-contact.png",
+      "/assets/images/projects/tyler_tran_preview_01.png",
+      "/assets/images/projects/tyler_tran_preview_02.png",
+      "/assets/images/projects/tyler_tran_preview_03.png",
+      "/assets/images/projects/tyler_tran_preview_04.png",
     ],
-    // TODO: Need update real images
-    coverImage: "/images/tyler-portfolio-cover.png",
+    coverImage: "/assets/images/projects/tyler_tran_cover.png",
   },
   {
+    id: uniqueId(),
     title: "Whittaker Portfolio",
     description:
       "An elegant and professional portfolio website featuring a clean design aesthetic and intuitive navigation. Showcases creative projects and professional experience with attention to detail.",
@@ -63,17 +65,15 @@ export const projects: IProject[] = [
       "🗂️ Project filtering and categorization",
       "🖼️ Responsive image galleries",
     ],
-
-    // TODO: Need update real images
     screenshots: [
-      "/images/whittaker-portfolio-home.png",
-      "/images/whittaker-portfolio-about.png",
-      "/images/whittaker-portfolio-projects.png",
+      "/assets/images/projects/whittaker_preview_01.png",
+      "/assets/images/projects/whittaker_preview_02.png",
+      "/assets/images/projects/whittaker_preview_03.png",
     ],
-    // TODO: Need update real images
-    coverImage: "/images/whittaker-portfolio-cover.png",
+    coverImage: "/assets/images/projects/whittaker_cover.png",
   },
   {
+    id: uniqueId(),
     title: "Conian Guys Portfolio",
     description:
       "A modern and responsive personal portfolio built with React.js, showcasing projects, skills, and experience. Designed for easy navigation and optimized to highlight work for potential clients and recruiters.",
@@ -88,18 +88,16 @@ export const projects: IProject[] = [
       "✉️ Contact information for easy communication",
       "🎨 Smooth animations throughout for a modern, interactive feel",
     ],
-
-    // TODO: Need update real images
     screenshots: [
-      "/images/conian-guys-dashboard.png",
-      "/images/conian-guys-messaging.png",
-      "/images/conian-guys-profile.png",
-      "/images/conian-guys-admin.png",
+      "/assets/images/projects/conian_guys_preview_01.png",
+      "/assets/images/projects/conian_guys_preview_02.png",
+      "/assets/images/projects/conian_guys_preview_03.png",
+      "/assets/images/projects/conian_guys_cover.png",
     ],
-    // TODO: Need update real images
-    coverImage: "/images/conian-guys-cover.png",
+    coverImage: "/assets/images/projects/conian_guys_cover.png",
   },
   {
+    id: uniqueId(),
     title: "Next Auth Template",
     description:
       "A starter template for seamless authentication integration using Next.js, NextAuth.js, and TypeScript. This repo provides a clean, scalable foundation for building secure full-stack applications with built-in social and credential-based login support.",
@@ -123,17 +121,11 @@ export const projects: IProject[] = [
       "💻 Ready-to-use UI components (optional, if applicable)",
       "🛡️ Middleware for protected routes and error handling",
     ],
-    // TODO: Need update real images
-    screenshots: [
-      "/images/conian-guys-dashboard.png",
-      "/images/conian-guys-messaging.png",
-      "/images/conian-guys-profile.png",
-      "/images/conian-guys-admin.png",
-    ],
-    // TODO: Need update real images
-    coverImage: "/images/conian-guys-cover.png",
+    screenshots: ["/assets/images/projects/next_auth_preview_01.jpg"],
+    coverImage: "/assets/images/projects/next_auth_cover.png",
   },
   {
+    id: uniqueId(),
     title: "Node Auth Template",
     description:
       "A lightweight and scalable authentication starter built with Node.js and TypeScript. Designed for secure API development, this template offers a solid foundation for building backend services with modern tooling.",
@@ -157,14 +149,7 @@ export const projects: IProject[] = [
       "🛡️ Middleware for protected routes and error handling",
       "📦 Environment-based config and easy extension for database integration",
     ],
-    // TODO: Need update real images
-    screenshots: [
-      "/images/conian-guys-dashboard.png",
-      "/images/conian-guys-messaging.png",
-      "/images/conian-guys-profile.png",
-      "/images/conian-guys-admin.png",
-    ],
-    // TODO: Need update real images
-    coverImage: "/images/conian-guys-cover.png",
+    screenshots: ["/assets/images/projects/node_auth_preview_01.png"],
+    coverImage: "/assets/images/projects/node_auth_cover.webp",
   },
 ];

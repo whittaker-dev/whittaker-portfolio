@@ -18,7 +18,7 @@
     ]
   },
   "dependencies": {
-    "@base-ui-components/react": "^1.0.0-beta.0",
+    "@base-ui-components/react": "^1.0.0-beta.1",
     "@emailjs/browser": "^4.4.1",
     "@headlessui/react": "^2.2.4",
     "@iconify/react": "^6.0.0",
@@ -31,7 +31,7 @@
     "lint-staged": "^15.5.0",
     "lodash": "^4.17.21",
     "lucide-react": "^0.522.0",
-    "motion": "^12.18.1",
+    "motion": "^12.23.5",
     "next": "15.3.3",
     "nextjs-toploader": "^3.8.16",
     "prettier": "^3.5.3",
@@ -41,6 +41,7 @@
     "react-hot-toast": "^2.5.2",
     "react-i18next": "^15.5.2",
     "react-responsive": "^10.0.1",
+    "react-use-measure": "^2.1.7",
     "tailwind-merge": "^3.3.1",
     "type-fest": "^4.39.1"
   },

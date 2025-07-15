@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "motion/react";
+import { ShimmeringText } from "@/components/animate-ui/text/shimmering";
 
 type Props = {
   title: string;
@@ -14,9 +15,17 @@ const SectionHeader = React.memo(
       <motion.div className="flex items-center justify-center flex-col cursor-pointer">
         <motion.h1
           whileHover={{ scale: 1.1 }}
-          className="text-xl md:text-4xl font-black text-green-primary py-2 px-4 border border-green-primary rounded-xl bg-white dark:border-green-primary"
+          className="text-xl md:text-4xl font-black text-green-primary border-2 border-green-primary rounded-xl py-2 px-4"
         >
-          * {title} *
+          *
+          <ShimmeringText
+            className="text-xl md:text-4xl font-black text-green-primary mx-4"
+            text={title}
+            wave
+            color="var(--color-green-primary)"
+            shimmeringColor="var(--color-green-primary)"
+          />
+          *
         </motion.h1>
         {showUnderline && (
           <motion.div
