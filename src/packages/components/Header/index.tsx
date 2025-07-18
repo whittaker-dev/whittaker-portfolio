@@ -133,7 +133,7 @@ const Header = () => {
             <div className="">
               <div className="space-y-2">
                 <div className="flex items-center justify-between gap-2">
-                  <h1 className="text-sm md:text-base font-black text-dark-primary">
+                  <h1 className="text-sm md:text-base font-black text-dark-primary dark:text-green-500">
                     Minh Tai
                   </h1>
                   <Icon
@@ -141,7 +141,7 @@ const Header = () => {
                     className="size-6 animate-spin text-green-primary"
                   />
                 </div>
-                <p className="text-xs md:text-sm font-medium text-gray-500">
+                <p className="text-xs md:text-sm font-medium text-gray-500 dark:text-white">
                   minhtai250501@gmail.com
                 </p>
               </div>
@@ -152,7 +152,7 @@ const Header = () => {
                     className="cursor-pointer hover:no-underline border-0 pb-0 flex items-center justify-between"
                     chevronClassName="text-green-primary"
                   >
-                    <h1 className="text-sm md:text-sm font-black text-green-primary">
+                    <h1 className="text-sm md:text-sm font-black text-green-primary dark:text-white">
                       {t("explore_more")}
                     </h1>
                   </AccordionButton>
@@ -161,11 +161,11 @@ const Header = () => {
                       <a
                         key={setting.id}
                         href="#"
-                        className="text-xs md:text-sm font-semibold text-dark-primary hover:underline flex items-center justify-start gap-2 hover:text-green-primary"
+                        className="text-xs md:text-sm font-semibold text-dark-primary hover:underline flex items-center justify-start gap-2 hover:text-green-primary dark:text-white transition-all"
                       >
                         <Icon
                           icon={setting.icon}
-                          className="size-4 md:size-6 text-green-primary"
+                          className="size-4 md:size-6 text-green-primary dark:text-white"
                         />
                         {t(setting.title)}
                       </a>

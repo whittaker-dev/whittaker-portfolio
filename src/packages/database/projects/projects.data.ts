@@ -10,7 +10,7 @@ export const projects: IProject[] = [
     techStacks: [
       "NuxtJS",
       "TypeScript",
-      "Tailwind CSS",
+      "Tailwind",
       "Framer Motion",
       "SCSS",
       "Vercel",
@@ -31,6 +31,7 @@ export const projects: IProject[] = [
       "⚡ Performance optimized with lazy loading",
     ],
     screenshots: [
+      "/assets/images/projects/tyler_tran_cover.png",
       "/assets/images/projects/tyler_tran_preview_01.png",
       "/assets/images/projects/tyler_tran_preview_02.png",
       "/assets/images/projects/tyler_tran_preview_03.png",
@@ -46,7 +47,7 @@ export const projects: IProject[] = [
     techStacks: [
       "Next.js",
       "TypeScript",
-      "Tailwind CSS",
+      "Tailwind",
       "Framer Motion",
       "Vercel",
       "Slack Integration",
@@ -66,9 +67,10 @@ export const projects: IProject[] = [
       "🖼️ Responsive image galleries",
     ],
     screenshots: [
+      "/assets/images/projects/whittaker_cover.png",
       "/assets/images/projects/whittaker_preview_01.png",
       "/assets/images/projects/whittaker_preview_02.png",
-      "/assets/images/projects/whittaker_preview_03.png",
+      "/assets/images/projects/whittaker_preview_03.jpg",
     ],
     coverImage: "/assets/images/projects/whittaker_cover.png",
   },

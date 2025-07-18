@@ -34,5 +34,9 @@
   "my_resume": "My Resume",
   "feature_projects": "Feature Projects",
   "projects_desc": "A look into my projects and the contributions I've made over the years.",
-  "waiting": "Waiting..."
+  "waiting": "Waiting...",
+  "view_details": "View Details",
+  "tech_stacks": "Tech Stacks",
+  "features": "Features",
+  "just_playing_around": "Just playing around"
 }

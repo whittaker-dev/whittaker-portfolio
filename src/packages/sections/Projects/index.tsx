@@ -12,6 +12,7 @@ const Projects = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true });
   const stepper = 25;
+
   useEffect(() => {
     if (!isInView || progress >= 100) return;
     const timer = setInterval(() => {

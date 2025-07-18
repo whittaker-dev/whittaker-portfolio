@@ -9,5 +9,15 @@
     {
       "mode": "auto"
     }
+  ],
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "contentClassName",
+    "bodyClassName",
+    "footerClassName",
+    "headerClassName",
+    "titleClassName",
+    "rootClassName"
   ]
 }
