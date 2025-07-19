@@ -33,7 +33,7 @@ const ModalProjectDetails = ({ project, isOpen, onClose }: Props) => {
       }
       onClose={onClose}
       contentClassName={
-        "min-w-[90%] md:min-w-[768px] lg:min-w-[1024px] dark:bg-gradient-to-tl from-blue-primary to-dark-primary"
+        "min-w-[90%] md:min-w-[768px] lg:min-w-[1024px] dark:bg-gradient-to-tl from-blue-primary to-dark-primary p-2.5 md:p-4"
       }
       content={
         <div className="flex items-center justify-between gap-4 md:gap-10 lg:gap-20 pr-2 flex-col-reverse lg:flex-row">
@@ -71,7 +71,7 @@ const ModalProjectDetails = ({ project, isOpen, onClose }: Props) => {
           {/* ==== PROJECT SCREENSHOTS ==== */}
           <div className="flex-1 lg:mr-10">
             <CarouselBase
-              rootClassName="size-[250px] md:size-[350px] lg:w-full"
+              rootClassName="size-[200px] md:size-[350px] lg:w-full"
               items={project.screenshots.map((image) => ({
                 id: image,
                 content: (
