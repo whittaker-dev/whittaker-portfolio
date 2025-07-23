@@ -1,4 +1,5 @@
 import {
+  FeatureFlag,
   I18NClientProvider,
   QueryClientWrapper,
   ThemeProvider,
@@ -51,7 +52,9 @@ export default function RootLayout({
         <QueryClientWrapper>
           <I18NClientProvider>
             <ToasterProvider>
-              <ThemeProvider>{children}</ThemeProvider>
+              <ThemeProvider>
+                <FeatureFlag>{children}</FeatureFlag>
+              </ThemeProvider>
             </ToasterProvider>
           </I18NClientProvider>
         </QueryClientWrapper>

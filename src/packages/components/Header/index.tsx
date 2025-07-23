@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionPanel,
 } from "@/components/animate-ui/headless/accordion";
+import { userSettings } from "@/packages/database";
 import { useResponsiveDetect } from "@/packages/hooks";
 import { useTheme } from "@/providers/Theme";
 import { Icon } from "@iconify/react";
@@ -15,7 +16,6 @@ import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import SidebarMobile from "../SidebarMobile";
 import UserPopover from "../UserPopover";
-import { userSettings } from "@/packages/database";
 
 export interface IMenu {
   title: string;
