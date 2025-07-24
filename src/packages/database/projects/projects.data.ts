@@ -47,6 +47,7 @@ export const projects: IProject[] = [
     techStacks: [
       "Next.js",
       "TypeScript",
+      "Featured Flag (Split.io)",
       "Tailwind",
       "Framer Motion",
       "Vercel",
