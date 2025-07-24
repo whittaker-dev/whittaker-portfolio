@@ -3,6 +3,7 @@ import { Background, Header, ToggleTheme } from "@/packages/components";
 import Toolbar from "@/packages/components/Toolbar";
 import {
   AboutMe,
+  Contact,
   ExperienceSection,
   HeroSection,
   Projects,
@@ -30,6 +31,8 @@ export default function Home() {
             <ExperienceSection />
 
             <Projects />
+
+            <Contact />
           </div>
         </div>
         <Toolbar />

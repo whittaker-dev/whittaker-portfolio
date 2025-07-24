@@ -46,14 +46,6 @@ const Header = () => {
       href: "#projects",
     },
     {
-      title: t("testimonials"),
-      href: "#testimonials",
-    },
-    {
-      title: t("certificates"),
-      href: "#certificates",
-    },
-    {
       title: t("contact"),
       href: "#contact",
     },
@@ -99,7 +91,7 @@ const Header = () => {
             <Image src={"/assets/images/logo.png"} fill alt={"logo"} />
           )}
         </motion.div>
-        <div className="items-center justify-end gap-6 hidden lg:flex flex-1">
+        <div className="items-center justify-center gap-6 hidden lg:flex flex-1">
           {menus.map((menu, index) => (
             <motion.a
               key={index}

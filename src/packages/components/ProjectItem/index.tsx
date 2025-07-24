@@ -34,7 +34,7 @@ const ProjectItem = React.memo(({ project, index }: Props) => {
       className="border border-gray-200 rounded-lg shadow cursor-pointer dark:bg-blend-darken"
     >
       <div className="relative size-full h-64 lg:h-52  overflow-hidden rounded-tl-lg rounded-tr-lg">
-        <Image src={coverImage} alt={title} fill objectFit="cover" />
+        <Image src={coverImage} alt={title} fill className="object-cover" />
       </div>
       <div className="p-4">
         <div className="space-y-2">
