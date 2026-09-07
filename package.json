@@ -38,6 +38,7 @@
     "motion": "^12.23.6",
     "next": "15.3.3",
     "nextjs-toploader": "^3.8.16",
+    "nodemailer": "10.0.0",
     "prettier": "^3.5.3",
     "radix-ui": "^1.4.2",
     "react": "^19.0.0",

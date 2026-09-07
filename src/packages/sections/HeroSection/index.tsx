@@ -9,7 +9,7 @@ interface ISocialLink {
   icon: string;
 }
 const HeroSection = () => {
-  const fullName = "James Whittaker";
+  const fullName = "Whittaker Tran";
   const headlines = [
     "Software Engineer",
     "Full Stack Developer",

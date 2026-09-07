@@ -21,8 +21,8 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "James Whittaker",
-  description: "James Whittaker - Full Stack Developer",
+  title: "Whittaker Tran",
+  description: "Whittaker Tran - Full Stack Developer",
 };
 
 export default function RootLayout({
