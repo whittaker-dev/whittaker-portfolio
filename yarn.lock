@@ -29,7 +29,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@base-ui-components/react@npm:^1.0.0-beta.1":
+"@base-ui-components/react@npm:1.0.0-beta.1":
   version: 1.0.0-beta.1
   resolution: "@base-ui-components/react@npm:1.0.0-beta.1"
   dependencies:
@@ -7082,7 +7082,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "whittaker-portfolio@workspace:."
   dependencies:
-    "@base-ui-components/react": ^1.0.0-beta.1
+    "@base-ui-components/react": 1.0.0-beta.1
     "@emailjs/browser": ^4.4.1
     "@eslint/eslintrc": ^3
     "@headlessui/react": ^2.2.4
