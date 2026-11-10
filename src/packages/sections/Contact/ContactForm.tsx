@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import WaveText from "@/packages/components/WaveText";
 import {
   CONTACT_FIELD_LIMITS,
   hasContactErrors,
@@ -37,10 +38,7 @@ type FieldProps = {
 
 const Field = ({ name, label, error, children }: FieldProps) => (
   <div className="flex flex-col gap-2">
-    <Label
-      htmlFor={name}
-      className="text-xs md:text-sm font-medium text-dark-primary dark:text-white"
-    >
+    <Label htmlFor={name} className="text-[13px] font-medium text-ink">
       {label}
     </Label>
     {children}
@@ -48,9 +46,9 @@ const Field = ({ name, label, error, children }: FieldProps) => (
       <motion.span
         initial={{ opacity: 0, y: -4 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center gap-1 text-xs font-normal text-invalid"
+        className="flex items-center gap-1.5 text-[13px] text-danger"
       >
-        <Icon icon="solar:danger-circle-bold" className="size-3.5 shrink-0" />
+        <Icon icon="ph:warning-circle-bold" className="size-4 shrink-0" />
         {t(error)}
       </motion.span>
     )}
@@ -114,17 +112,11 @@ const ContactForm = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className="flex flex-col gap-4 bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-xl shadow-xl p-6 backdrop-blur-xl dark:border-white/10 border border-dark-primary/10 dark:from-gray-900 dark:via-white/10 dark:to-black"
+      className="flex flex-col gap-5 border border-line bg-paper-raised p-5 md:p-8"
     >
-      <div className="flex items-center justify-start gap-2">
-        <Icon
-          icon="solar:plain-2-bold"
-          className="size-4 md:size-5 text-green-primary"
-        />
-        <h2 className="text-sm md:text-base font-black text-dark-primary dark:text-white">
-          {t("contact_form_title")}
-        </h2>
-      </div>
+      <h3 className="font-display text-[1.75rem] uppercase leading-none text-ink">
+        <WaveText text={t("contact_form_title")} />
+      </h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Field name="name" label={t("contact_field_name")} error={errors.name}>
@@ -195,7 +187,7 @@ const ContactForm = () => {
           disabled={isPending}
           className="resize-none"
         />
-        <span className="self-end text-[10px] md:text-xs font-normal text-gray-700 dark:text-white/60">
+        <span className="self-end font-mono text-[11px] text-ink-muted tabular-nums">
           {values.message.length}/{CONTACT_FIELD_LIMITS.message}
         </span>
       </Field>
@@ -218,7 +210,7 @@ const ContactForm = () => {
         type="submit"
         size="lg"
         disabled={isPending}
-        className="mt-2 w-full bg-green-primary text-white hover:bg-green-primary-800 rounded-xl shadow-xl"
+        className="mt-2 h-12 w-full rounded-none bg-brand text-sm font-semibold text-on-brand transition-[filter] hover:bg-brand hover:brightness-125"
       >
         {isPending ? (
           <>
@@ -227,7 +219,7 @@ const ContactForm = () => {
           </>
         ) : (
           <>
-            <Icon icon="solar:plain-2-bold" className="size-4" />
+            <Icon icon="ph:paper-plane-tilt-bold" className="size-4" />
             {t("contact_send")}
           </>
         )}

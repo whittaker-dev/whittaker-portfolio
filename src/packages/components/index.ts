@@ -1,25 +1,47 @@
-import Background from "./Background";
 import Header from "./Header";
-import ToggleTheme from "./ToggleTheme";
-import TypeWriter from "./TypeWriter";
-import BackgroundWithoutPoints from "./BackgroundWithoutPoints";
-import SectionHeader from "./SectionHeader";
+import Footer from "./Footer";
+import MobileMenu from "./MobileMenu";
+import Intro from "./Intro";
+import CustomCursor from "./CustomCursor";
+import ScrollProgress from "./ScrollProgress";
+import Marquee from "./Marquee";
+import Magnetic from "./Magnetic";
+import ScrambleText from "./ScrambleText";
+import SplitReveal from "./SplitReveal";
+import WaveText from "./WaveText";
+import CountUp from "./CountUp";
+import SectionHeading from "./SectionHeading";
 import TechStackList from "./TechStackList";
-import TechStackItem from "./TechStackItem";
+import TechStackRow from "./TechStackRow";
 import ExperienceItem from "./ExperienceItem";
-import AnimatedLinePath from "./AnimatedLinePath";
-import UserPopover from "./UserPopover";
+import ProjectList from "./ProjectList";
+import ProjectRing from "./ProjectRing";
+import PosterRing from "./PosterRing";
+import PosterLightbox from "./PosterLightbox";
+import ViewSwitch from "./ViewSwitch";
+import ProjectDetails from "./ProjectDetails";
 
 export {
-  Background,
   Header,
-  ToggleTheme,
-  TypeWriter,
-  BackgroundWithoutPoints,
-  SectionHeader,
+  Footer,
+  MobileMenu,
+  Intro,
+  CustomCursor,
+  ScrollProgress,
+  Marquee,
+  Magnetic,
+  ScrambleText,
+  SplitReveal,
+  WaveText,
+  CountUp,
+  SectionHeading,
   TechStackList,
-  TechStackItem,
+  TechStackRow,
   ExperienceItem,
-  AnimatedLinePath,
-  UserPopover,
+  ProjectList,
+  ProjectRing,
+  PosterRing,
+  PosterLightbox,
+  ViewSwitch,
+  ProjectDetails,
 };

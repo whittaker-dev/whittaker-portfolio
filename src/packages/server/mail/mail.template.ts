@@ -14,21 +14,32 @@ const escapeHtml = (value: string): string =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
+/**
+ * Hex mirrors of the site tokens in globals.css (paper, ink, line, brand). Mail clients
+ * do not read CSS variables or oklch(), so the values are restated here.
+ */
 const BRAND = {
-  green: "#27ae60",
-  greenDark: "#1a4d2e",
-  ink: "#1f2b24",
-  muted: "#6b7a72",
-  hairline: "#e6eae8",
-  canvas: "#f4f6f5",
+  paper: "#f4f2ec",
+  card: "#ffffff",
+  ink: "#16182a",
+  inkMuted: "#5d6070",
+  line: "#e2e0da",
+  night: "#0d0e13",
+  nightMuted: "#a7a9b6",
+  blue: "#0a21c0",
+  blueOnDark: "#7b8cff",
 } as const;
 
+// Anton loads where the client allows web fonts (Apple Mail, iOS); Gmail and Outlook
+// strip the <link>, so the stack falls back to a condensed system face, then any bold sans.
+const DISPLAY =
+  "Anton, 'Arial Narrow', 'Helvetica Neue Condensed', Impact, Arial, sans-serif";
 const MONO =
   "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
 const SANS =
-  "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+  "'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 
-/** Up to two initials for the avatar disc; falls back to a dot for an unusable name. */
+/** Up to two initials for the sender tile; falls back to a dot for an unusable name. */
 const getInitials = (name: string): string => {
   const initials = name
     .split(/\s+/)
@@ -55,8 +66,8 @@ const buildPreheader = (message: string): string =>
 
 const metaRow = (label: string, valueHtml: string): string => `
   <tr>
-    <td class="text-muted" style="padding:0 0 8px;width:76px;font-family:${MONO};font-size:11px;letter-spacing:0.04em;text-transform:uppercase;color:${BRAND.muted};vertical-align:top;">${label}</td>
-    <td class="text-main" style="padding:0 0 8px;font-family:${SANS};font-size:14px;font-weight:600;color:${BRAND.ink};vertical-align:top;word-break:break-word;">${valueHtml}</td>
+    <td class="text-muted" style="padding:0 0 10px;width:84px;font-family:${MONO};font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:${BRAND.inkMuted};vertical-align:top;line-height:20px;">${label}</td>
+    <td class="text-main" style="padding:0 0 10px;font-family:${SANS};font-size:15px;font-weight:600;color:${BRAND.ink};vertical-align:top;word-break:break-word;line-height:20px;">${valueHtml}</td>
   </tr>`;
 
 export const buildContactEmail = (
@@ -102,41 +113,50 @@ export const buildContactEmail = (
     <meta name="color-scheme" content="light dark" />
     <meta name="supported-color-schemes" content="light dark" />
     <title>${safeSubject}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Be+Vietnam+Pro:wght@400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet" />
     <style>
       /* Progressive enhancement only: Outlook drops this block, and the inline styles
          below already render the light design correctly on their own. */
       @media (prefers-color-scheme: dark) {
-        .canvas { background: #0d1210 !important; }
-        .card { background: #151b18 !important; border-color: rgba(255, 255, 255, 0.08) !important; }
-        .text-main { color: #eef2f0 !important; }
-        .text-muted { color: #98a49e !important; }
-        .divider { background: rgba(255, 255, 255, 0.09) !important; }
-        .quote { background: rgba(255, 255, 255, 0.04) !important; }
-        .avatar-ring { background: #1d2622 !important; }
+        .canvas { background: #0d0e13 !important; }
+        .card { background: #17181f !important; border-color: rgba(244, 242, 236, 0.1) !important; }
+        .text-main { color: #f4f2ec !important; }
+        .text-muted { color: #a7a9b6 !important; }
+        .rule { background: rgba(244, 242, 236, 0.1) !important; }
+        .quote { background: #0d0e13 !important; border-color: rgba(244, 242, 236, 0.1) !important; }
+        .link { color: #7b8cff !important; }
       }
       @media only screen and (max-width: 620px) {
         .px { padding-left: 22px !important; padding-right: 22px !important; }
-        .subject { font-size: 20px !important; }
+        .subject { font-size: 30px !important; }
       }
-      a { color: ${BRAND.green}; }
+      a { color: ${BRAND.blue}; }
     </style>
   </head>
-  <body class="canvas" style="margin:0;padding:0;background:${BRAND.canvas};">
+  <body class="canvas" style="margin:0;padding:0;background:${BRAND.paper};">
     <div style="display:none;max-height:0;overflow:hidden;opacity:0;">${buildPreheader(message)}</div>
 
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" class="canvas" style="background:${BRAND.canvas};">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" class="canvas" style="background:${BRAND.paper};">
       <tr>
         <td align="center" style="padding:32px 12px;">
-          <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" class="card" style="width:600px;max-width:600px;background:#ffffff;border:1px solid ${BRAND.hairline};border-radius:16px;overflow:hidden;">
+          <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" class="card" style="width:600px;max-width:600px;background:${BRAND.card};border:1px solid ${BRAND.line};">
 
-            <!-- ==== HEADER ==== -->
+            <!-- ==== HEADER: the hero's night ground, wordmark and subject ==== -->
             <tr>
-              <td style="background:${BRAND.green};background-image:linear-gradient(135deg, ${BRAND.green} 0%, ${BRAND.greenDark} 100%);padding:26px 32px;">
-                <p style="margin:0 0 10px;font-family:${MONO};font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.82);">
-                  &#9733;&nbsp; Portfolio &middot; New message
-                </p>
-                <h1 class="subject" style="margin:0;font-family:${SANS};font-size:23px;line-height:1.32;font-weight:800;color:#ffffff;word-break:break-word;">
-                  ${safeSubject}
+              <td class="px" style="background:${BRAND.night};padding:22px 32px 30px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td style="font-family:${DISPLAY};font-size:20px;letter-spacing:0.02em;color:#f4f2ec;text-transform:uppercase;">
+                      Whittaker<span style="color:${BRAND.blueOnDark};">.</span>
+                    </td>
+                    <td align="right" style="font-family:${MONO};font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:${BRAND.nightMuted};">
+                      New message
+                    </td>
+                  </tr>
+                </table>
+                <div style="height:1px;line-height:1px;font-size:0;background:rgba(244,242,236,0.12);margin:20px 0 22px;">&nbsp;</div>
+                <h1 class="subject" style="margin:0;font-family:${DISPLAY};font-size:38px;line-height:1;font-weight:700;letter-spacing:0.005em;text-transform:uppercase;color:#f4f2ec;word-break:break-word;">
+                  ${safeSubject}<span style="color:${BRAND.blueOnDark};">.</span>
                 </h1>
               </td>
             </tr>
@@ -146,19 +166,19 @@ export const buildContactEmail = (
               <td class="px" style="padding:28px 32px 0;">
                 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
                   <tr>
-                    <td width="52" style="vertical-align:top;">
+                    <td width="60" style="vertical-align:top;">
                       <table role="presentation" cellpadding="0" cellspacing="0" border="0">
                         <tr>
-                          <td class="avatar-ring" width="44" height="44" align="center" valign="middle" style="width:44px;height:44px;background:${BRAND.greenDark};border-radius:50%;font-family:${SANS};font-size:16px;font-weight:800;color:#ffffff;text-align:center;">
+                          <td width="44" height="44" align="center" valign="middle" style="width:44px;height:44px;background:${BRAND.blue};font-family:${DISPLAY};font-size:18px;color:#ffffff;text-align:center;letter-spacing:0.02em;">
                             ${escapeHtml(getInitials(name))}
                           </td>
                         </tr>
                       </table>
                     </td>
-                    <td style="vertical-align:top;padding-left:4px;">
+                    <td style="vertical-align:top;">
                       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
                         ${metaRow("From", safeName)}
-                        ${metaRow("Email", `<a href="mailto:${mailtoAddress}" style="color:${BRAND.green};text-decoration:none;">${safeEmail}</a>`)}
+                        ${metaRow("Email", `<a class="link" href="mailto:${mailtoAddress}" style="color:${BRAND.blue};text-decoration:none;">${safeEmail}</a>`)}
                         ${metaRow("Received", `<span style="font-weight:400;">${escapeHtml(receivedLabel)}</span>`)}
                       </table>
                     </td>
@@ -167,19 +187,13 @@ export const buildContactEmail = (
               </td>
             </tr>
 
-            <!-- ==== DIVIDER ==== -->
-            <tr>
-              <td class="px" style="padding:22px 32px 0;">
-                <div class="divider" style="height:1px;line-height:1px;font-size:0;background:${BRAND.hairline};">&nbsp;</div>
-              </td>
-            </tr>
-
             <!-- ==== MESSAGE ==== -->
             <tr>
-              <td class="px" style="padding:22px 32px 0;">
-                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" class="quote" style="background:#f7faf8;border-radius:12px;">
+              <td class="px" style="padding:20px 32px 0;">
+                <p class="text-muted" style="margin:0 0 10px;font-family:${MONO};font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:${BRAND.inkMuted};">Message</p>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" class="quote" style="background:${BRAND.paper};border:1px solid ${BRAND.line};">
                   <tr>
-                    <td style="padding:18px 20px;border-left:3px solid ${BRAND.green};border-radius:12px;">
+                    <td style="padding:20px 22px 6px;">
                       <div class="text-main" style="font-family:${SANS};font-size:15px;color:${BRAND.ink};word-break:break-word;">
                         ${toHtmlParagraphs(message)}
                       </div>
@@ -191,29 +205,30 @@ export const buildContactEmail = (
 
             <!-- ==== REPLY CTA ==== -->
             <tr>
-              <td class="px" style="padding:24px 32px 4px;">
+              <td class="px" style="padding:26px 32px 4px;">
                 <table role="presentation" cellpadding="0" cellspacing="0" border="0">
                   <tr>
-                    <td align="center" style="background:${BRAND.green};border-radius:10px;">
-                      <a href="${replyHref}" style="display:inline-block;padding:13px 26px;font-family:${SANS};font-size:14px;font-weight:700;color:#ffffff;text-decoration:none;">
-                        Reply to ${firstName} &rarr;
+                    <td align="center" style="background:${BRAND.blue};">
+                      <a href="${replyHref}" style="display:inline-block;padding:14px 24px;font-family:${SANS};font-size:14px;font-weight:700;color:#ffffff;text-decoration:none;">
+                        Reply to ${firstName} &nbsp;&rarr;
                       </a>
                     </td>
                   </tr>
                 </table>
-                <p class="text-muted" style="margin:12px 0 0;font-family:${SANS};font-size:12px;line-height:1.6;color:${BRAND.muted};">
-                  Hitting reply in your mail client works too &mdash; this message already
-                  carries their address in <span style="font-family:${MONO};">Reply-To</span>.
+                <p class="text-muted" style="margin:12px 0 0;font-family:${SANS};font-size:13px;line-height:1.6;color:${BRAND.inkMuted};">
+                  Hitting reply in your mail client works too. This message already carries
+                  their address in <span style="font-family:${MONO};">Reply-To</span>.
                 </p>
               </td>
             </tr>
 
             <!-- ==== FOOTER ==== -->
             <tr>
-              <td class="px" style="padding:22px 32px 28px;">
-                <div class="divider" style="height:1px;line-height:1px;font-size:0;background:${BRAND.hairline};margin-bottom:16px;">&nbsp;</div>
-                <p class="text-muted" style="margin:0;font-family:${MONO};font-size:11px;letter-spacing:0.04em;color:${BRAND.muted};">
-                  Sent by the contact form on whittaker-portfolio.vercel.app
+              <td class="px" style="padding:24px 32px 28px;">
+                <div class="rule" style="height:1px;line-height:1px;font-size:0;background:${BRAND.line};margin-bottom:16px;">&nbsp;</div>
+                <p class="text-muted" style="margin:0;font-family:${MONO};font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:${BRAND.inkMuted};">
+                  Sent from the contact form on
+                  <a class="link" href="https://whittaker-portfolio.vercel.app" style="color:${BRAND.blue};text-decoration:none;">whittaker-portfolio.vercel.app</a>
                 </p>
               </td>
             </tr>
