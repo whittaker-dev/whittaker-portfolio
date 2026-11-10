@@ -4,6 +4,56 @@ import { IProject } from "./project.interface";
 export const projects: IProject[] = [
   {
     id: uniqueId(),
+    title: "Atomic Habits",
+    description:
+      "A personal growth OS in one pnpm monorepo: habit missions with streaks and XP, real-time multiplayer party games, a shared trip planner, and RiseCore, a pipeline that renders Reels with Remotion, has Claude write the captions and posts them to Facebook every day.",
+    techStacks: [
+      "Next.js",
+      "Express",
+      "Claude API",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL",
+      "Redis",
+      "BullMQ",
+      "Three.js",
+      "Remotion",
+      "PeerJS",
+      "GitHub Actions",
+      "TailwindCSS",
+    ],
+    demos: [
+      { label: "Habit missions", url: "https://atomic-habits-ai.vercel.app/" },
+      { label: "Games", url: "https://atomic-habits-ai.vercel.app/games" },
+      {
+        label: "Plan trip",
+        url: "https://atomic-habits-ai.vercel.app/plan-trip",
+      },
+    ],
+    githubLink: "https://github.com/whittaker-dev/Atomic-Habits",
+    features: [
+      "Habit missions: daily missions, streaks, XP and levels, with a Redis-cached dashboard and BullMQ notifications",
+      "Daily English challenges with vocabulary drills and mini quizzes",
+      "Games hub: Bomb Arena (up to 6 players, bots, 72 characters, 13 maps), Paint Turf (3D, Three.js) and Draw & Guess (Vietnamese word packs)",
+      "Friends join a game by link, room code or QR; games run entirely in the browser",
+      "Plan trip: shared plan with members, transport, stays and a day-by-day itinerary in English and Vietnamese, saved on the server so the group stays in sync",
+      "RiseCore: Reels rendered with Remotion and Three.js, captions written by the Claude API, posted to a Facebook Page daily by GitHub Actions as drafts or scheduled posts",
+      "Built with Claude Code as the AI pair programmer",
+    ],
+    screenshots: [
+      "/assets/images/projects/atomic_habits_cover.jpg",
+      "/assets/images/projects/atomic_habits_preview_01.jpg",
+      "/assets/images/projects/atomic_habits_preview_02.jpg",
+      "/assets/images/projects/atomic_habits_preview_06.jpg",
+      "/assets/images/projects/atomic_habits_preview_07.jpg",
+      "/assets/images/projects/atomic_habits_preview_04.jpg",
+      "/assets/images/projects/atomic_habits_preview_05.jpg",
+      "/assets/images/projects/atomic_habits_preview_03.jpg",
+    ],
+    coverImage: "/assets/images/projects/atomic_habits_cover.jpg",
+  },
+  {
+    id: uniqueId(),
     title: "Tyler Tran Portfolio",
     description:
       "A modern, responsive portfolio website showcasing full-stack development skills with interactive animations and smooth user experience. Built with cutting-edge technologies and optimized for performance.",
@@ -19,7 +69,7 @@ export const projects: IProject[] = [
       "ESLint",
       "Prettier",
     ],
-    liveDemo: "https://imtylertran.vercel.app",
+    demos: [{ url: "https://imtylertran.vercel.app" }],
     githubLink: "https://github.com/TrySomeThign/tylertran-short-portfolio",
     features: [
       "📱 Responsive design with mobile-first approach",
@@ -57,7 +107,7 @@ export const projects: IProject[] = [
       "ESLint",
       "Prettier",
     ],
-    liveDemo: "https://whittaker-portfolio.vercel.app/en",
+    demos: [{ url: "https://whittaker-portfolio.vercel.app/en" }],
     githubLink: "https://github.com/whittaker-dev/whittaker-portfolio",
     features: [
       "🧼 Clean and minimalist design",
@@ -81,7 +131,7 @@ export const projects: IProject[] = [
     description:
       "A modern and responsive personal portfolio built with React.js, showcasing projects, skills, and experience. Designed for easy navigation and optimized to highlight work for potential clients and recruiters.",
     techStacks: ["React", "Styled-Components", "SASS", "Vercel"],
-    liveDemo: "https://conianguys.vercel.app/",
+    demos: [{ url: "https://conianguys.vercel.app/" }],
     githubLink: "https://github.com/whittaker-dev/Portfolio-Website",
     features: [
       "⚛️ Built with React.js for fast, responsive performance",

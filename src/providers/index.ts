@@ -2,6 +2,7 @@ import I18NClientProvider from "./i18n";
 import QueryClientWrapper from "./QueryClient";
 import ToasterProvider from "./Toaster";
 import { ThemeProvider } from "./Theme";
+import { MotionProvider } from "./Motion";
 import ClientOnly from "./ClientOnly";
 import FeatureFlag from "./FeatureFlag";
 
@@ -10,6 +11,7 @@ export {
   QueryClientWrapper,
   ToasterProvider,
   ThemeProvider,
+  MotionProvider,
   ClientOnly,
   FeatureFlag,
 };

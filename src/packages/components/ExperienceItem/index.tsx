@@ -1,194 +1,120 @@
 "use client";
-import React from "react";
 import { IExperience } from "@/packages/database";
-import Image from "next/image";
-import { motion } from "motion/react";
-import { Icon } from "@iconify/react";
 import dayjs from "dayjs";
 import { t } from "i18next";
-import { useResponsiveDetect } from "@/packages/hooks";
+import { motion, useScroll, useSpring } from "motion/react";
+import Image from "next/image";
+import { useRef } from "react";
+import WaveText from "../WaveText";
+
+const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
+
 const ExperienceItem = ({ experience }: { experience: IExperience }) => {
-  const { isMobile } = useResponsiveDetect();
+  const ref = useRef<HTMLElement>(null);
+  // The rail fills as the role is read: it ties the scroll to "how far through this job" you are.
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 75%", "end 60%"],
+  });
+  const railScale = useSpring(scrollYProgress, { stiffness: 140, damping: 30 });
+
+  const start = dayjs(experience.startDate).format("MMM YYYY");
+  const end = experience.endDate
+    ? dayjs(experience.endDate).format("MMM YYYY")
+    : t("present");
+
   return (
-    <div className="flex items-start justify-center md:justify-start gap-6 flex-col md:flex-row">
-      <div className="flex items-center justify-center md:justify-start gap-6 flex-col md:flex-row w-full md:w-fit">
-        {/* ===== LOGO ==== */}
-        <motion.div
-          initial={{ scale: 0, rotate: 360 }}
-          whileInView={{ scale: 1, rotate: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="size-16 bg-green-primary flex items-center justify-center rounded-xl shadow-2xl"
-        >
-          <div className="flex items-center justify-center size-8 bg-white">
-            <motion.div className="size-6 relative rounded-full">
-              <Image src={experience.logo} alt="logo-nus" fill />
-            </motion.div>
-          </div>
-        </motion.div>
-        <motion.div
-          initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          className="w-14 bg-green-600 h-[2px] relative"
-        >
-          <div className="size-2.5 bg-green-600 rounded-full absolute left-0 top-1/2 -translate-y-1/2"></div>
-          <div className="size-2.5 bg-green-600 rounded-full absolute right-0 top-1/2 -translate-y-1/2"></div>
-        </motion.div>
-      </div>
-
-      {/* ===== DESCRIPTION ==== */}
-      <div className="flex flex-col items-start justify-start gap-2 flex-1 px-4 md:px-0">
-        <div className="">
-          {/* ==== START & END DATE ==== */}
-          <motion.div className="flex items-center justify-start gap-2 mb-4">
-            <motion.div
-              initial={{ x: -20, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              <Icon
-                icon="cuida:calendar-outline"
-                className="size-5 text-dark-primary dark:text-white"
+    <article
+      ref={ref}
+      className="grid grid-cols-1 gap-8 border-t border-line-strong pt-8 md:grid-cols-12 md:gap-10"
+    >
+      {/* ==== WHEN + WHERE ==== */}
+      <div className="md:col-span-4 lg:col-span-3">
+        <div className="md:sticky md:top-28">
+          <p className="font-mono text-[12px] uppercase tracking-[0.12em] text-brand-ink">
+            <time dateTime={dayjs(experience.startDate).format("YYYY-MM")}>
+              {start}
+            </time>{" "}
+            — {end}
+          </p>
+          <div className="mt-6 flex items-center gap-3">
+            <span className="relative flex size-12 shrink-0 items-center justify-center border border-line bg-white">
+              <Image
+                src={experience.logo}
+                alt=""
+                width={28}
+                height={28}
+                className="object-contain"
               />
-            </motion.div>
-            <motion.p
-              initial={{ x: -20, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.3, ease: "easeInOut", delay: 0.2 }}
-              className="text-sm font-medium text-gray-700 dark:text-white"
-            >
-              {dayjs(experience.startDate).format("MMMM YYYY")} -{" "}
-              {experience.endDate
-                ? dayjs(experience.endDate).format("MMMM YYYY")
-                : t("present")}
-            </motion.p>
-          </motion.div>
-
-          {/* ==== TITLE & COMPANY ==== */}
-          <motion.h1
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeInOut", delay: 0.2 }}
-            className="text-lg font-bold font-boldonse text-green-primary mb-2.5"
-          >
-            {experience.title}
-          </motion.h1>
-          <motion.p
-            initial={{ x: 20, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.3, ease: "easeInOut", delay: 0.4 }}
-            className="text-base font-black text-blue-primary dark:text-blue-secondary uppercase"
-          >
-            {experience.company}
-          </motion.p>
-
-          <motion.p
-            initial={{ x: isMobile ? 0 : 50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeInOut", delay: 0.4 }}
-            className="mt-4 text-sm md:text-base font-medium text-gray-700 leading-[25px] dark:text-white"
-          >
-            {experience.description}
-          </motion.p>
-
-          {/* ==== ACHIEVEMENTS ==== */}
-          <div className="mt-8">
-            <motion.div className="flex items-center justify-start gap-2 mb-4">
-              <motion.div
-                initial={{ x: -20, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              >
-                <Icon
-                  icon="solar:cup-star-bold"
-                  className="size-6 text-yellow-cup"
-                />
-              </motion.div>
-              <motion.p
-                initial={{ x: -20, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.3, ease: "easeInOut", delay: 0.2 }}
-                className="text-base font-semibold text-gray-700 dark:text-white"
-              >
-                {t("key_achievements")}
-              </motion.p>
-            </motion.div>
-            <div className="space-y-2.5">
-              {experience.achievements.map((achievement, index) => (
-                <motion.div
-                  initial={{ x: -20, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  transition={{
-                    duration: 0.3,
-                    ease: "easeInOut",
-                    delay: 0.2 + index * 0.1,
-                  }}
-                  className="flex items-start justify-start gap-2"
-                  key={index}
-                >
-                  <div className="size-5 bg-green-primary rounded-full flex items-center justify-center">
-                    <div className="size-2 bg-white rounded-full"></div>
-                  </div>
-                  <motion.p
-                    whileHover={{
-                      scale: 1.1,
-                      x: 30,
-                      transition: { duration: 0.4 },
-                    }}
-                    className="text-sm md:text-base italic font-medium text-gray-700 flex-1 dark:text-white cursor-pointer"
-                  >
-                    {achievement}
-                  </motion.p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* ==== TECH SKILLS ==== */}
-          <div className="mt-6">
-            <motion.div className="flex items-center justify-start gap-2 mb-4">
-              <motion.div
-                initial={{ x: -20, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              >
-                <Icon
-                  icon="mynaui:terminal-solid"
-                  className="size-6 text-dark-primary dark:text-green-primary"
-                />
-              </motion.div>
-              <motion.p
-                initial={{ x: -20, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.3, ease: "easeInOut", delay: 0.2 }}
-                className="text-base font-semibold text-gray-700 dark:text-white"
-              >
-                {t("technologies_skills")}
-              </motion.p>
-            </motion.div>
-            <div className="flex items-center justify-start gap-2 flex-wrap">
-              {experience.techSkills.map((achievement, index) => (
-                <motion.div
-                  initial={{ y: 50, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  transition={{
-                    duration: 0.3,
-                    ease: "easeInOut",
-                    delay: 0.2 + index * 0.1,
-                  }}
-                  key={index}
-                  className="cursor-pointer"
-                >
-                  <p className="text-xs md:text-sm py-2 px-2.5 border border-gray-300 rounded-lg font-medium text-gray-700 flex-1 dark:text-white shadow-sm hover:border-blue-secondary">
-                    {achievement}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+            </span>
+            <span>
+              <span className="block text-[15px] font-semibold text-ink">
+                {experience.company}
+              </span>
+              <span className="block text-[13px] text-ink-muted">
+                {experience.location}
+              </span>
+            </span>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* ==== ROLE ==== */}
+      <div className="relative md:col-span-8 md:pl-10 lg:col-span-9">
+        <span
+          aria-hidden="true"
+          className="absolute inset-y-0 left-0 hidden w-px bg-line md:block"
+        >
+          <motion.span
+            className="absolute inset-0 origin-top bg-brand-ink"
+            style={{ scaleY: railScale }}
+          />
+        </span>
+
+        <h3 className="display text-[clamp(2.25rem,4.5vw,3.5rem)]">
+          <WaveText text={experience.title} />
+        </h3>
+        <p className="mt-5 max-w-[65ch] text-[15px] leading-relaxed text-ink-muted md:text-base">
+          {experience.description}
+        </p>
+
+        <h4 className="label mt-12">{t("key_achievements")}</h4>
+        <ul className="mt-3">
+          {experience.achievements.map((achievement, index) => (
+            <motion.li
+              key={achievement}
+              className="flex items-start gap-4 border-b border-line py-4 text-[15px] text-ink md:text-base"
+              initial={{ opacity: 0, x: -12 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-5% 0px" }}
+              transition={{
+                duration: 0.55,
+                delay: Math.min(index * 0.06, 0.3),
+                ease: EASE_OUT_EXPO,
+              }}
+            >
+              <span
+                aria-hidden="true"
+                className="mt-[0.55em] size-1.5 shrink-0 bg-brand-ink"
+              />
+              {achievement}
+            </motion.li>
+          ))}
+        </ul>
+
+        <h4 className="label mt-12">{t("technologies_skills")}</h4>
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {experience.techSkills.map((skill) => (
+            <li
+              key={skill}
+              className="border border-line px-3 py-1.5 text-[13px] font-medium text-ink-muted transition-colors hover:border-brand-ink hover:text-ink"
+            >
+              {skill}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </article>
   );
 };
 

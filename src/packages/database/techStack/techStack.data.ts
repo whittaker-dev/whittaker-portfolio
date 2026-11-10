@@ -26,6 +26,13 @@ export const backendStack: ITechStack[] = [
     icon: "devicon:socketio",
     experience: 2.5,
   },
+  {
+    id: uniqueId(),
+    name: "BullMQ",
+    // No BullMQ logo exists in Iconify; a queue glyph stands in.
+    icon: "ph:queue-bold",
+    experience: 2,
+  },
 ];
 
 export const frontEndStack: ITechStack[] = [
@@ -67,42 +74,51 @@ export const frontEndStack: ITechStack[] = [
   },
 ];
 
+export const mobileStack: ITechStack[] = [
+  {
+    id: uniqueId(),
+    name: "React Native",
+    icon: "devicon:reactnative",
+    experience: 2,
+  },
+];
+
 export const databaseStack: ITechStack[] = [
   {
     id: uniqueId(),
     name: "PostgresSQL",
     icon: "logos:postgresql",
-    experience: 2.5,
+    experience: 2,
   },
   {
     id: uniqueId(),
     name: "MongoDB",
     icon: "devicon:mongodb",
-    experience: 1.5,
+    experience: 2,
   },
   {
     id: uniqueId(),
     name: "MySQL",
     icon: "logos:mysql-icon",
-    experience: 2.5,
+    experience: 2,
   },
   {
     id: uniqueId(),
     name: "Redis",
     icon: "skill-icons:redis-dark",
-    experience: 1,
+    experience: 2,
   },
   {
     id: uniqueId(),
     name: "Prisma",
     icon: "logos:prisma",
-    experience: 2.5,
+    experience: 2,
   },
   {
     id: uniqueId(),
     name: "TypeORM",
     icon: "logos:typeorm",
-    experience: 2.5,
+    experience: 2,
   },
 ];
 
@@ -137,20 +153,57 @@ export const cloudDevOpsStack: ITechStack[] = [
     icon: "skill-icons:git",
     experience: 2.5,
   },
+  {
+    id: uniqueId(),
+    name: "GitHub Actions",
+    icon: "logos:github-actions",
+    experience: 2,
+  },
+  {
+    id: uniqueId(),
+    name: "Nginx",
+    icon: "logos:nginx",
+    experience: 2,
+  },
+  {
+    id: uniqueId(),
+    name: "Jest",
+    icon: "logos:jest",
+    experience: 2,
+  },
 ];
 
 const aiIntegrationStack: ITechStack[] = [
   {
     id: uniqueId(),
+    name: "Claude",
+    icon: "logos:claude-icon",
+    experience: 2,
+  },
+  {
+    id: uniqueId(),
+    name: "Codex",
+    icon: "simple-icons:openai",
+    experience: 2,
+  },
+  {
+    id: uniqueId(),
+    name: "Devin",
+    // No Devin logo exists in Iconify; a robot glyph stands in.
+    icon: "ph:robot-bold",
+    experience: 2,
+  },
+  {
+    id: uniqueId(),
     name: "OpenAI",
     icon: "logos:openai-icon",
-    experience: 1.5,
+    experience: 2,
   },
   {
     id: uniqueId(),
     name: "V0.dev",
     icon: "skill-icons:vercel-dark",
-    experience: 1,
+    experience: 2,
   },
   {
     id: uniqueId(),
@@ -162,13 +215,13 @@ const aiIntegrationStack: ITechStack[] = [
     id: uniqueId(),
     name: "Supabase",
     icon: "logos:supabase-icon",
-    experience: 0.5,
+    experience: 2,
   },
   {
     id: uniqueId(),
     name: "SendGrid",
     icon: "logos:sendgrid-icon",
-    experience: 1.5,
+    experience: 2,
   },
 ];
 
@@ -202,6 +255,11 @@ export const techStackCategories: ITechStackCategory[] = [
     id: uniqueId(),
     name: "Frontend",
     techStacks: frontEndStack,
+  },
+  {
+    id: uniqueId(),
+    name: "Mobile",
+    techStacks: mobileStack,
   },
   {
     id: uniqueId(),

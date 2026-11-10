@@ -1,27 +1,22 @@
-import React from "react";
-import { motion } from "motion/react";
+"use client";
+import SectionHeading from "@/packages/components/SectionHeading";
+import TechStackList from "@/packages/components/TechStackList";
 import { t } from "i18next";
-import { SectionHeader } from "@/packages/components";
-import { TechStackList } from "@/packages/components";
 
 const TechnologyStack = () => {
   return (
-    <motion.section
+    <section
       id="technology-stack"
-      className="my-56"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
+      className="border-t border-line py-24 md:py-36"
     >
-      <SectionHeader
-        title={t("technology_stack")}
-        description={t("technology_stack_desc")}
-        showUnderline
-      />
-
-      <TechStackList />
-    </motion.section>
+      <div className="shell">
+        <SectionHeading
+          title={t("technology_stack")}
+          description={t("technology_stack_desc")}
+        />
+        <TechStackList />
+      </div>
+    </section>
   );
 };
 

@@ -3,6 +3,7 @@ import AboutMe from "./AboutMe";
 import TechnologyStack from "./TechnologyStack";
 import ExperienceSection from "./ExperienceSection";
 import Projects from "./Projects";
+import DesignArchive from "./DesignArchive";
 import Contact from "./Contact";
 
 export {
@@ -11,5 +12,6 @@ export {
   TechnologyStack,
   ExperienceSection,
   Projects,
+  DesignArchive,
   Contact,
 };

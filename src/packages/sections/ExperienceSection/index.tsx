@@ -1,31 +1,24 @@
-import { SectionHeader } from "@/packages/components";
-import React from "react";
-import { motion } from "motion/react";
-import { t } from "i18next";
-import { experiences } from "@/packages/database";
+"use client";
 import ExperienceItem from "@/packages/components/ExperienceItem";
+import SectionHeading from "@/packages/components/SectionHeading";
+import { experiences } from "@/packages/database";
+import { t } from "i18next";
+
 const ExperienceSection = () => {
   return (
-    <motion.section
-      id="experience"
-      className="my-56"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
-    >
-      <SectionHeader
-        title={t("experience")}
-        description={t("about_me_desc")}
-        showUnderline
-      />
-
-      <div className="mt-20">
-        {experiences.map((experience) => (
-          <ExperienceItem key={experience.id} experience={experience} />
-        ))}
+    <section id="experience" className="border-t border-line py-24 md:py-36">
+      <div className="shell">
+        <SectionHeading
+          title={t("experience")}
+          description={t("experience_desc")}
+        />
+        <div className="mt-14 space-y-16 md:mt-20">
+          {experiences.map((experience) => (
+            <ExperienceItem key={experience.id} experience={experience} />
+          ))}
+        </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

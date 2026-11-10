@@ -7,11 +7,11 @@ function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
     <textarea
       data-slot="textarea"
       className={cn(
-        "selection:bg-green-primary selection:text-white flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:bg-input/30",
-        // body sets an unlayered dark `color`, so the theme-aware colour has to be stated here.
-        "text-dark-primary dark:text-white placeholder:text-gray-500 dark:placeholder:text-white/40",
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-        "aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
+        "flex field-sizing-content min-h-16 w-full rounded-none border border-line-strong bg-paper px-3.5 py-3 text-base transition-[border-color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-[15px]",
+        "text-ink placeholder:text-ink-muted",
+        // The global :focus-visible outline would double up with the field border.
+        "focus-visible:border-brand-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-ink/30",
+        "aria-invalid:border-danger aria-invalid:ring-danger/25",
         className,
       )}
       {...props}

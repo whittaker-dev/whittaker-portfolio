@@ -1,83 +1,99 @@
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion"; // ✅ useInView from framer-motion
-import { SectionHeader } from "@/packages/components";
-import { t } from "i18next";
+"use client";
+import ProjectDetails from "@/packages/components/ProjectDetails";
 import ProjectList from "@/packages/components/ProjectList";
+import ProjectRing from "@/packages/components/ProjectRing";
+import SectionHeading from "@/packages/components/SectionHeading";
+import ViewSwitch, { ViewOption } from "@/packages/components/ViewSwitch";
 import { projects } from "@/packages/database";
-import { SlidingNumber } from "@/components/animate-ui/text/sliding-number";
-import { Progress, ProgressTrack } from "@/components/animate-ui/base/progress";
+import { t } from "i18next";
+import { AnimatePresence, motion } from "motion/react";
+import { useState } from "react";
+
+type ProjectView = "carousel" | "list";
+
+const VIEW_STORAGE_KEY = "project-view";
+const VIEWS: ViewOption<ProjectView>[] = [
+  { id: "carousel", icon: "ph:circles-three-bold", label: "view_carousel" },
+  { id: "list", icon: "ph:list-bold", label: "view_list" },
+];
+
+// Remembered per visitor as a convenience; anything unreadable falls back to the carousel.
+const readStoredView = (): ProjectView => {
+  try {
+    return localStorage.getItem(VIEW_STORAGE_KEY) === "list"
+      ? "list"
+      : "carousel";
+  } catch {
+    return "carousel";
+  }
+};
 
 const Projects = () => {
-  const [progress, setProgress] = useState(0);
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true });
-  const stepper = 25;
+  const [view, setView] = useState<ProjectView>(readStoredView);
+  // The drawer keeps showing the last project while it animates closed.
+  const [openIndex, setOpenIndex] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    if (!isInView || progress >= 100) return;
-    const timer = setInterval(() => {
-      setProgress((prev) => (prev >= 100 ? 100 : prev + stepper));
-    }, 500);
-    return () => clearInterval(timer);
-  }, [isInView, progress]);
+  const changeView = (next: ProjectView) => {
+    setView(next);
+    try {
+      localStorage.setItem(VIEW_STORAGE_KEY, next);
+    } catch {
+      // Not remembered, still switched.
+    }
+  };
 
-  const isFinished = progress >= 100;
+  const openProject = (index: number) => {
+    setOpenIndex(index);
+    setIsOpen(true);
+  };
 
   return (
-    <motion.section
-      id="projects"
-      className="my-56"
-      ref={sectionRef}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
-    >
-      <SectionHeader
-        title={t("feature_projects")}
-        description={t("projects_desc")}
-        showUnderline
+    <section id="projects" className="border-t border-line py-24 md:py-36">
+      <div className="shell">
+        <SectionHeading
+          title={t("feature_projects")}
+          description={t("projects_desc")}
+          aside={
+            <ViewSwitch
+              id="project-view"
+              label={t("view_mode")}
+              value={view}
+              options={VIEWS.map((option) => ({
+                ...option,
+                label: t(option.label),
+              }))}
+              onChange={changeView}
+            />
+          }
+        />
+
+        <div className="mt-14 md:mt-20">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={view}
+              initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -16, filter: "blur(6px)" }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {view === "carousel" ? (
+                <ProjectRing projects={projects} onOpen={openProject} />
+              ) : (
+                <ProjectList projects={projects} onOpen={openProject} />
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      <ProjectDetails
+        project={projects[openIndex]}
+        number={String(openIndex + 1).padStart(2, "0")}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
       />
-
-      <motion.div
-        animate={{
-          opacity: isFinished ? 0 : 1,
-          scale: isFinished ? 0 : 1,
-          display: isFinished ? "none" : "flex",
-          transition: { duration: 0.5 },
-        }}
-        className="flex items-center justify-center mt-10"
-      >
-        <Progress value={progress} className="w-[300px] space-y-2">
-          <div className="flex items-center justify-between gap-1">
-            <h1 className="text-base lg:text-xl font-medium text-green-600 dark:text-white">
-              {t("waiting")}
-            </h1>
-            <div className="flex items-center justify-end gap-2 text-xl lg:text-3xl font-bold text-green-600 dark:text-white">
-              <SlidingNumber number={progress} padStart />
-              <span>%</span>
-            </div>
-          </div>
-          <ProgressTrack className="bg-green-200" />
-        </Progress>
-      </motion.div>
-
-      <motion.div
-        animate={{
-          opacity: !isFinished ? 0 : 1,
-          scale: !isFinished ? 0 : 1,
-          display: !isFinished ? "none" : "block",
-          transition: {
-            duration: 0.5,
-            delay: 0.5,
-            ease: "easeOut",
-          },
-        }}
-        className="mt-10"
-      >
-        <ProjectList projects={projects} />
-      </motion.div>
-    </motion.section>
+    </section>
   );
 };
 

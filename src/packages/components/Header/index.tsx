@@ -1,187 +1,174 @@
 "use client";
-import {
-  Accordion,
-  AccordionButton,
-  AccordionItem,
-  AccordionPanel,
-} from "@/components/animate-ui/headless/accordion";
-import { userSettings } from "@/packages/database";
-import { useResponsiveDetect } from "@/packages/hooks";
+import { resumeUrl } from "@/packages/database";
+import { useActiveSection } from "@/packages/hooks";
+import { useMotionPreference } from "@/providers/Motion";
 import { useTheme } from "@/providers/Theme";
 import { Icon } from "@iconify/react";
 import { t } from "i18next";
-import { motion } from "motion/react";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import { useState } from "react";
 import { twMerge } from "tailwind-merge";
-import SidebarMobile from "../SidebarMobile";
-import UserPopover from "../UserPopover";
+import MobileMenu from "../MobileMenu";
+import ScrambleText from "../ScrambleText";
 
 export interface IMenu {
+  id: string;
   title: string;
-  href: string;
 }
 
 const Header = () => {
-  const { theme } = useTheme();
-  const { isMobile } = useResponsiveDetect();
-  const [isShowSidebar, setIsShowSidebar] = useState(false);
-  const [isShowShadow, setIsShowShadow] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const { motionEnabled, toggleMotion } = useMotionPreference();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menus: IMenu[] = [
-    {
-      title: t("overview"),
-      href: "#about",
-    },
-    {
-      title: t("stack"),
-      href: "#technology-stack",
-    },
-    {
-      title: t("experience"),
-      href: "#experience",
-    },
-    {
-      title: t("projects"),
-      href: "#projects",
-    },
-    {
-      title: t("contact"),
-      href: "#contact",
-    },
+    { id: "about", title: t("overview") },
+    { id: "technology-stack", title: t("stack") },
+    { id: "experience", title: t("experience") },
+    { id: "projects", title: t("projects") },
+    { id: "contact", title: t("contact") },
   ];
-  const toggleShowSidebar = () => {
-    setIsShowSidebar(!isShowSidebar);
-  };
+  const activeId = useActiveSection(menus.map((menu) => menu.id));
 
-  useEffect(() => {
-    if (!isMobile) {
-      setIsShowSidebar(false);
-    }
-  }, [isMobile]);
-
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
-        setIsShowShadow(true);
-      } else {
-        setIsShowShadow(false);
-      }
-    });
-  }, [isShowShadow]);
+  const { scrollY } = useScroll();
+  useMotionValueEvent(scrollY, "change", (value) => setIsScrolled(value > 24));
 
   return (
-    <div
+    <header
       className={twMerge(
-        "fixed top-0 left-0 right-0 z-50 w-full bg-gradient-to-br transition-all duration-200 from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700",
-        isShowShadow && "shadow-md",
+        "fixed inset-x-0 top-0 z-50 border-b border-transparent transition-[background-color,border-color] duration-300",
+        isScrolled && "border-line bg-paper/92",
       )}
     >
-      <div className="my-0 mx-auto flex items-center justify-between lg:justify-center md:py-2 pr-2.5 md:pr-0 gap-10 max-w-[100%] md:max-w-[80%] xl:max-w-[65%]">
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          whileTap={{ scale: 0.9 }}
-          whileHover={{ scale: 2, animation: "ease-out" }}
-          className="w-16 md:w-14 h-16 md:h-14 relative rounded-full overflow-hidden cursor-pointer"
+      <div className="shell flex h-16 items-center justify-between gap-6 md:h-[72px]">
+        <a
+          href="#top"
+          className="display flex items-baseline text-2xl tracking-[0.01em]"
+          aria-label="Whittaker Tran, back to top"
         >
-          {theme === "dark" ? (
-            <Image src={"/assets/images/logo_white.png"} fill alt={"logo"} />
-          ) : (
-            <Image src={"/assets/images/logo.png"} fill alt={"logo"} />
-          )}
-        </motion.div>
-        <div className="items-center justify-center gap-6 hidden lg:flex flex-1">
-          {menus.map((menu, index) => (
-            <motion.a
-              key={index}
-              href={menu.href}
-              className={twMerge(
-                "text-sm font-medium text-blue-primary hover:underline dark:text-white",
-              )}
-              whileTap={{ scale: 0.9 }}
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              {menu.title}
-            </motion.a>
-          ))}
-        </div>
+          WHITTAKER
+          <span className="ml-0.5 inline-block size-1.5 bg-brand-ink" />
+        </a>
 
-        <UserPopover
-          align={isMobile ? "center" : "end"}
-          trigger={
-            <motion.div className="relative size-10 rounded-full overflow-hidden cursor-pointer">
-              <Image
-                src={"/assets/images/avatar.jpeg"}
-                alt=""
-                fill
-                className="object-cover"
-              />
-            </motion.div>
-          }
-          content={
-            <div className="">
-              <div className="space-y-2">
-                <div className="flex items-center justify-between gap-2">
-                  <h1 className="text-sm md:text-base font-black text-dark-primary dark:text-green-500">
-                    Minh Tai
-                  </h1>
-                  <Icon
-                    icon="iconamoon:settings-fill"
-                    className="size-6 animate-spin text-green-primary"
-                  />
-                </div>
-                <p className="text-xs md:text-sm font-medium text-gray-500 dark:text-white">
-                  minhtai250501@gmail.com
-                </p>
-              </div>
-              <div className="w-full h-[1px] bg-gray-300 mt-2.5 md:mt-4"></div>
-              <Accordion className="w-full">
-                <AccordionItem className="border-0" defaultOpen>
-                  <AccordionButton
-                    className="cursor-pointer hover:no-underline border-0 pb-0 flex items-center justify-between"
-                    chevronClassName="text-green-primary"
+        <nav aria-label="Primary" className="hidden lg:block">
+          <ul className="flex items-center gap-9">
+            {menus.map((menu) => {
+              const isActive = activeId === menu.id;
+              return (
+                <li key={menu.id}>
+                  <a
+                    href={`#${menu.id}`}
+                    aria-current={isActive ? "location" : undefined}
+                    className={twMerge(
+                      "relative flex items-center text-[13px] font-medium text-ink-muted transition-colors hover:text-ink",
+                      isActive && "text-ink",
+                    )}
                   >
-                    <h1 className="text-sm md:text-sm font-black text-green-primary dark:text-white">
-                      {t("explore_more")}
-                    </h1>
-                  </AccordionButton>
-                  <AccordionPanel className="space-y-4 mt-4 pb-0">
-                    {userSettings.map((setting) => (
-                      <a
-                        key={setting.id}
-                        href="#"
-                        className="text-xs md:text-sm font-semibold text-dark-primary hover:underline flex items-center justify-start gap-2 hover:text-green-primary dark:text-white transition-all"
-                      >
-                        <Icon
-                          icon={setting.icon}
-                          className="size-4 md:size-6 text-green-primary dark:text-white"
-                        />
-                        {t(setting.title)}
-                      </a>
-                    ))}
-                  </AccordionPanel>
-                </AccordionItem>
-              </Accordion>
-            </div>
-          }
-        />
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-active-dot"
+                        className="absolute -left-3 size-1.5 rounded-full bg-brand-ink"
+                        transition={{
+                          type: "spring",
+                          stiffness: 420,
+                          damping: 34,
+                        }}
+                      />
+                    )}
+                    <ScrambleText text={menu.title} trigger="hover" />
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
 
-        <Icon
-          icon="solar:hamburger-menu-broken"
-          className="size-8 cursor-pointer text-blue-primary block lg:hidden dark:text-white"
-          onClick={toggleShowSidebar}
-        />
+        <div className="flex items-center gap-1 md:gap-3">
+          <button
+            type="button"
+            onClick={toggleMotion}
+            aria-pressed={motionEnabled}
+            aria-label={t("toggle_motion")}
+            className="hidden items-center gap-2 px-2 py-2 text-[12px] font-medium text-ink-muted transition-colors hover:text-ink md:flex"
+          >
+            <span className="flex h-3 items-end gap-[2px]" aria-hidden="true">
+              {[0, 1, 2].map((bar) => (
+                <motion.span
+                  key={bar}
+                  className="w-[2px] bg-current"
+                  animate={
+                    motionEnabled
+                      ? { height: ["4px", "12px", "6px", "10px", "4px"] }
+                      : { height: "4px" }
+                  }
+                  transition={{
+                    duration: 1.2,
+                    repeat: motionEnabled ? Infinity : 0,
+                    delay: bar * 0.18,
+                    ease: "easeInOut",
+                  }}
+                />
+              ))}
+            </span>
+            {motionEnabled ? t("motion_on") : t("motion_off")}
+          </button>
 
-        <SidebarMobile
-          isOpen={isShowSidebar}
-          handleClose={toggleShowSidebar}
-          menus={menus}
-        />
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={
+              theme === "dark" ? t("switch_to_light") : t("switch_to_dark")
+            }
+            className="flex size-10 items-center justify-center text-ink-muted transition-colors hover:text-ink"
+          >
+            <Icon
+              icon={theme === "dark" ? "ph:sun-bold" : "ph:moon-bold"}
+              className="size-[18px]"
+            />
+          </button>
+
+          <a
+            href={resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t("view_cv_label")}
+            className="hidden items-center gap-1.5 px-2 py-2 text-[13px] font-medium text-ink-muted transition-colors hover:text-ink md:flex"
+          >
+            <Icon icon="ph:file-text-bold" className="size-4" />
+            <ScrambleText text={t("view_cv")} trigger="hover" />
+          </a>
+
+          <a
+            href="#contact"
+            className="group hidden items-center gap-1.5 text-[13px] font-semibold text-ink md:flex"
+          >
+            <ScrambleText text={t("lets_talk")} trigger="hover" />
+            <Icon
+              icon="ph:arrow-up-right-bold"
+              className="size-3.5 text-brand-ink transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </a>
+
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen(true)}
+            aria-label={t("open_menu")}
+            aria-expanded={isMenuOpen}
+            className="flex size-10 items-center justify-center text-ink lg:hidden"
+          >
+            <Icon icon="ph:list-bold" className="size-6" />
+          </button>
+        </div>
       </div>
-    </div>
+
+      <MobileMenu
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        menus={menus}
+        activeId={activeId}
+      />
+    </header>
   );
 };
 
