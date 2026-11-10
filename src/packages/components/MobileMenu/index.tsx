@@ -6,7 +6,7 @@ import { useTheme } from "@/providers/Theme";
 import { Icon } from "@iconify/react";
 import { t } from "i18next";
 import { AnimatePresence, motion } from "motion/react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import type { IMenu } from "../Header";
 
@@ -23,8 +23,12 @@ const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 const MobileMenu = ({ isOpen, onClose, menus, activeId }: Props) => {
   const { theme, toggleTheme } = useTheme();
   const { motionEnabled, toggleMotion } = useMotionPreference();
-  // Headless UI locks page scroll while open, so the jump to a section waits for the exit.
+  // The section picked in the menu, held until the menu has finished closing.
   const pendingTarget = useRef<string | null>(null);
+  // A new object per click, so picking the same section twice still scrolls twice.
+  const [scrollRequest, setScrollRequest] = useState<{ id: string } | null>(
+    null,
+  );
 
   const handleNavigate = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -35,15 +39,27 @@ const MobileMenu = ({ isOpen, onClose, menus, activeId }: Props) => {
     onClose();
   };
 
-  const scrollToPending = () => {
+  const handleExitComplete = () => {
     if (!pendingTarget.current) return;
-    document.getElementById(pendingTarget.current)?.scrollIntoView();
-    history.replaceState(null, "", `#${pendingTarget.current}`);
+    setScrollRequest({ id: pendingTarget.current });
     pendingTarget.current = null;
   };
 
+  // Scrolling must wait until the Dialog has unmounted, not merely finished animating. Headless
+  // UI releases its scroll lock on unmount, and on iOS that release scrolls the page back to where
+  // it was when the menu opened, undoing any scroll made earlier. This passive effect runs in the
+  // same commit that removes the Dialog, after the lock is gone. The behaviour is explicit because
+  // the lock also pins `scroll-behavior: auto` on <html> until a microtask after release.
+  useEffect(() => {
+    if (!scrollRequest) return;
+    document
+      .getElementById(scrollRequest.id)
+      ?.scrollIntoView({ behavior: motionEnabled ? "smooth" : "auto" });
+    history.replaceState(null, "", `#${scrollRequest.id}`);
+  }, [scrollRequest, motionEnabled]);
+
   return (
-    <AnimatePresence onExitComplete={scrollToPending}>
+    <AnimatePresence onExitComplete={handleExitComplete}>
       {isOpen && (
         <Dialog
           static
