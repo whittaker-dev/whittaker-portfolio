@@ -228,19 +228,21 @@ const HeroSection = () => {
               className="absolute inset-0"
               style={{ scale: portraitScale }}
             >
+              {/* The illustration has a transparent background and its hair reaches the top edge,
+                  so it sits a little below the frame's top and stands on the bottom edge. */}
               <motion.div
-                className="absolute inset-0"
+                className="absolute inset-x-0 bottom-0 top-[7%]"
                 initial={{ scale: 1.25 }}
                 animate={{ scale: introDone ? 1 : 1.25 }}
                 transition={{ duration: 1.6, delay: 0.15, ease: EASE_OUT_EXPO }}
               >
                 <Image
-                  src="/assets/images/avatar.jpeg"
+                  src="/assets/images/avatar-illustration.webp"
                   alt="Illustrated portrait of Whittaker Tran"
                   fill
                   priority
                   sizes="(min-width: 1024px) 360px, 280px"
-                  className="object-cover object-[57%_center]"
+                  className="object-contain object-bottom"
                 />
               </motion.div>
             </motion.div>
