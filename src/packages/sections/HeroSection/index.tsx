@@ -1,4 +1,7 @@
 "use client";
+import AssembleFigure, {
+  type FadeStops,
+} from "@/packages/components/AssembleFigure";
 import CountUp from "@/packages/components/CountUp";
 import Magnetic from "@/packages/components/Magnetic";
 import ScrambleText from "@/packages/components/ScrambleText";
@@ -14,7 +17,6 @@ import { useMotionPreference } from "@/providers/Motion";
 import { Icon } from "@iconify/react";
 import { t } from "i18next";
 import { motion, useScroll, useTransform, type Variants } from "motion/react";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const ROLES = ["Full Stack Developer", "Software Engineer", "AI Enthusiast"];
@@ -22,11 +24,19 @@ const ROLE_INTERVAL_MS = 3200;
 const BACKDROP_WORD = "ENGINEER";
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 
-// Fades the cut at the bottom of the hero figure. A straight two-stop gradient starts with a
-// hard corner the eye reads as a line across the coat, so the alpha eases in through several
-// stops instead (roughly a smoothstep curve).
-const PORTRAIT_FADE =
-  "linear-gradient(to bottom, black 80%, rgb(0 0 0 / 0.97) 83%, rgb(0 0 0 / 0.9) 86%, rgb(0 0 0 / 0.78) 89%, rgb(0 0 0 / 0.6) 92%, rgb(0 0 0 / 0.38) 95%, rgb(0 0 0 / 0.16) 98%, transparent)";
+// Fades the cut at the bottom of the hero figure, as [position %, opacity]. A straight
+// two-stop fade starts with a hard corner the eye reads as a line across the coat, so the
+// opacity eases out through several stops instead (roughly a smoothstep curve).
+const PORTRAIT_FADE: FadeStops = [
+  [80, 1],
+  [83, 0.97],
+  [86, 0.9],
+  [89, 0.78],
+  [92, 0.6],
+  [95, 0.38],
+  [98, 0.16],
+  [100, 0],
+];
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 18 },
@@ -217,50 +227,28 @@ const HeroSection = () => {
         {/* ==== PORTRAIT ==== */}
         {/* No frame: the illustration is a cutout, so it stands free in front of the backdrop word.
             On large screens it drops through the grid's bottom padding to stand on the bottom rail,
-            and the mask fades out the cut across the coat so it never ends on a hard line. */}
+            and a fade dissolves the cut across the coat so it never ends on a hard line. */}
         <div className="order-1 flex justify-center lg:order-2 lg:col-span-4 lg:-mb-14 lg:self-end">
           {/* On large screens it is wider than its column and spills evenly into both gutters;
               much past 115% the coat starts to crowd the stats column on the right. */}
-          <motion.div
-            className="relative aspect-[1075/1463] w-[min(74vw,300px)] md:w-[360px] lg:w-[115%] lg:max-w-[520px] lg:shrink-0"
-            style={{
-              maskImage: PORTRAIT_FADE,
-              WebkitMaskImage: PORTRAIT_FADE,
-            }}
-            initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
-            animate={{
-              clipPath: introDone
-                ? "inset(0% 0% 0% 0%)"
-                : "inset(100% 0% 0% 0%)",
-            }}
-            transition={{
-              duration: 1.1,
-              delay: 0.15,
-              ease: [0.76, 0, 0.24, 1],
-            }}
-          >
-            {/* Both zooms grow from the bottom so the figure stays standing on its edge. */}
+          <div className="relative aspect-[1075/1463] w-[min(74vw,300px)] md:w-[360px] lg:w-[115%] lg:max-w-[520px] lg:shrink-0">
+            {/* The scroll zoom grows from the bottom so the figure stays standing on its edge. */}
             <motion.div
               className="absolute inset-0 origin-bottom"
               style={{ scale: portraitScale }}
             >
-              <motion.div
-                className="absolute inset-0 origin-bottom"
-                initial={{ scale: 1.15 }}
-                animate={{ scale: introDone ? 1 : 1.15 }}
-                transition={{ duration: 1.6, delay: 0.15, ease: EASE_OUT_EXPO }}
-              >
-                <Image
-                  src="/assets/images/avatar-illustration.webp"
-                  alt="Illustrated portrait of Whittaker Tran"
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 520px, 360px"
-                  className="object-contain object-bottom"
-                />
-              </motion.div>
+              <AssembleFigure
+                src="/assets/images/avatar-illustration.webp"
+                alt="Illustrated portrait of Whittaker Tran"
+                intrinsicWidth={1075}
+                intrinsicHeight={1463}
+                sizes="(min-width: 1024px) 520px, 360px"
+                play={introDone}
+                replayLabel={t("replay_figure")}
+                fade={PORTRAIT_FADE}
+              />
             </motion.div>
-          </motion.div>
+          </div>
         </div>
 
         {/* ==== AVAILABILITY + NUMBERS ==== */}

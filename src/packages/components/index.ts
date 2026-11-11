@@ -20,6 +20,7 @@ import PosterRing from "./PosterRing";
 import PosterLightbox from "./PosterLightbox";
 import ViewSwitch from "./ViewSwitch";
 import ProjectDetails from "./ProjectDetails";
+import AssembleFigure from "./AssembleFigure";
 
 export {
   Header,
@@ -44,4 +45,5 @@ export {
   PosterLightbox,
   ViewSwitch,
   ProjectDetails,
+  AssembleFigure,
 };

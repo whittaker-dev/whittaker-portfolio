@@ -127,5 +127,6 @@
   "poster_carousel_label": "Poster carousel",
   "previous_poster": "Previous poster",
   "next_poster": "Next poster",
-  "lightbox_hint": "Arrow keys to browse"
+  "lightbox_hint": "Arrow keys to browse",
+  "replay_figure": "Rebuild the portrait, with sound"
 }
