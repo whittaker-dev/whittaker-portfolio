@@ -22,6 +22,12 @@ const ROLE_INTERVAL_MS = 3200;
 const BACKDROP_WORD = "ENGINEER";
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 
+// Fades the cut at the bottom of the hero figure. A straight two-stop gradient starts with a
+// hard corner the eye reads as a line across the coat, so the alpha eases in through several
+// stops instead (roughly a smoothstep curve).
+const PORTRAIT_FADE =
+  "linear-gradient(to bottom, black 80%, rgb(0 0 0 / 0.97) 83%, rgb(0 0 0 / 0.9) 86%, rgb(0 0 0 / 0.78) 89%, rgb(0 0 0 / 0.6) 92%, rgb(0 0 0 / 0.38) 95%, rgb(0 0 0 / 0.16) 98%, transparent)";
+
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 18 },
   show: (delay: number = 0) => ({
@@ -209,9 +215,18 @@ const HeroSection = () => {
         </div>
 
         {/* ==== PORTRAIT ==== */}
-        <div className="order-1 flex justify-center lg:order-2 lg:col-span-4 lg:self-end">
+        {/* No frame: the illustration is a cutout, so it stands free in front of the backdrop word.
+            On large screens it drops through the grid's bottom padding to stand on the bottom rail,
+            and the mask fades out the cut across the coat so it never ends on a hard line. */}
+        <div className="order-1 flex justify-center lg:order-2 lg:col-span-4 lg:-mb-14 lg:self-end">
+          {/* On large screens it is wider than its column and spills evenly into both gutters;
+              much past 115% the coat starts to crowd the stats column on the right. */}
           <motion.div
-            className="relative aspect-[4/5] w-[min(62vw,240px)] overflow-hidden border border-line-strong bg-paper-raised md:w-[280px] lg:w-full lg:max-w-[360px]"
+            className="relative aspect-[1075/1463] w-[min(74vw,300px)] md:w-[360px] lg:w-[115%] lg:max-w-[520px] lg:shrink-0"
+            style={{
+              maskImage: PORTRAIT_FADE,
+              WebkitMaskImage: PORTRAIT_FADE,
+            }}
             initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
             animate={{
               clipPath: introDone
@@ -224,16 +239,15 @@ const HeroSection = () => {
               ease: [0.76, 0, 0.24, 1],
             }}
           >
+            {/* Both zooms grow from the bottom so the figure stays standing on its edge. */}
             <motion.div
-              className="absolute inset-0"
+              className="absolute inset-0 origin-bottom"
               style={{ scale: portraitScale }}
             >
-              {/* The illustration has a transparent background and its hair reaches the top edge,
-                  so it sits a little below the frame's top and stands on the bottom edge. */}
               <motion.div
-                className="absolute inset-x-0 bottom-0 top-[7%]"
-                initial={{ scale: 1.25 }}
-                animate={{ scale: introDone ? 1 : 1.25 }}
+                className="absolute inset-0 origin-bottom"
+                initial={{ scale: 1.15 }}
+                animate={{ scale: introDone ? 1 : 1.15 }}
                 transition={{ duration: 1.6, delay: 0.15, ease: EASE_OUT_EXPO }}
               >
                 <Image
@@ -241,7 +255,7 @@ const HeroSection = () => {
                   alt="Illustrated portrait of Whittaker Tran"
                   fill
                   priority
-                  sizes="(min-width: 1024px) 360px, 280px"
+                  sizes="(min-width: 1024px) 520px, 360px"
                   className="object-contain object-bottom"
                 />
               </motion.div>
