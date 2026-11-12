@@ -81,6 +81,12 @@ export const mobileStack: ITechStack[] = [
     icon: "devicon:reactnative",
     experience: 2,
   },
+  {
+    id: uniqueId(),
+    name: "Expo",
+    icon: "simple-icons:expo",
+    experience: 2,
+  },
 ];
 
 export const databaseStack: ITechStack[] = [
@@ -88,37 +94,39 @@ export const databaseStack: ITechStack[] = [
     id: uniqueId(),
     name: "PostgresSQL",
     icon: "logos:postgresql",
-    experience: 2,
+    experience: 2.5,
   },
   {
     id: uniqueId(),
     name: "MongoDB",
     icon: "devicon:mongodb",
-    experience: 2,
+    experience: 2.5,
   },
   {
     id: uniqueId(),
     name: "MySQL",
-    icon: "logos:mysql-icon",
-    experience: 2,
+    // The full-colour logo is near-black; the mono one takes the text colour in either theme.
+    icon: "simple-icons:mysql",
+    experience: 2.5,
   },
   {
     id: uniqueId(),
     name: "Redis",
     icon: "skill-icons:redis-dark",
-    experience: 2,
+    experience: 2.5,
   },
   {
     id: uniqueId(),
     name: "Prisma",
-    icon: "logos:prisma",
-    experience: 2,
+    // The full-colour logo is near-black; the mono one takes the text colour in either theme.
+    icon: "simple-icons:prisma",
+    experience: 2.5,
   },
   {
     id: uniqueId(),
     name: "TypeORM",
     icon: "logos:typeorm",
-    experience: 2,
+    experience: 2.5,
   },
 ];
 
@@ -127,25 +135,31 @@ export const cloudDevOpsStack: ITechStack[] = [
     id: uniqueId(),
     name: "AWS",
     icon: "logos:aws-cloudfront",
-    experience: 1.5,
+    experience: 2.5,
   },
   {
     id: uniqueId(),
     name: "Google Cloud Platform",
     icon: "material-icon-theme:gcp",
-    experience: 0.5,
+    experience: 2.5,
   },
   {
     id: uniqueId(),
     name: "Firebase",
     icon: "devicon:firebase",
-    experience: 2,
+    experience: 2.5,
+  },
+  {
+    id: uniqueId(),
+    name: "Render",
+    icon: "simple-icons:render",
+    experience: 2.5,
   },
   {
     id: uniqueId(),
     name: "Docker",
     icon: "devicon:docker",
-    experience: 1.5,
+    experience: 2.5,
   },
   {
     id: uniqueId(),
@@ -157,19 +171,19 @@ export const cloudDevOpsStack: ITechStack[] = [
     id: uniqueId(),
     name: "GitHub Actions",
     icon: "logos:github-actions",
-    experience: 2,
+    experience: 2.5,
   },
   {
     id: uniqueId(),
     name: "Nginx",
     icon: "logos:nginx",
-    experience: 2,
+    experience: 2.5,
   },
   {
     id: uniqueId(),
     name: "Jest",
     icon: "logos:jest",
-    experience: 2,
+    experience: 1,
   },
 ];
 
@@ -196,13 +210,8 @@ const aiIntegrationStack: ITechStack[] = [
   {
     id: uniqueId(),
     name: "OpenAI",
-    icon: "logos:openai-icon",
-    experience: 2,
-  },
-  {
-    id: uniqueId(),
-    name: "V0.dev",
-    icon: "skill-icons:vercel-dark",
+    // The full-colour logo is solid black; the mono one takes the text colour in either theme.
+    icon: "simple-icons:openai",
     experience: 2,
   },
   {
@@ -221,6 +230,12 @@ const aiIntegrationStack: ITechStack[] = [
     id: uniqueId(),
     name: "SendGrid",
     icon: "logos:sendgrid-icon",
+    experience: 2,
+  },
+  {
+    id: uniqueId(),
+    name: "Resend",
+    icon: "simple-icons:resend",
     experience: 2,
   },
 ];
